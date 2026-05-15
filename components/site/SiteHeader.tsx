@@ -3,6 +3,7 @@
 import { Menu, Sparkles, X } from "lucide-react";
 import { useState } from "react";
 import { Container } from "@/components/site/Container";
+import Link from "next/link";
 
 function NavLink({
   href,
@@ -12,12 +13,12 @@ function NavLink({
   children: React.ReactNode;
 }) {
   return (
-    <a
+    <Link
       href={href}
       className="text-sm font-medium text-slate-600 transition hover:text-slate-950"
     >
       {children}
-    </a>
+    </Link>
   );
 }
 
@@ -27,7 +28,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur">
       <Container className="flex items-center justify-between py-4">
-        <a href="/" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-950 text-white shadow-sm">
             <Sparkles className="h-5 w-5" />
           </div>
@@ -38,7 +39,7 @@ export function SiteHeader() {
               Research. Build. Support.
             </p>
           </div>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-7 md:flex">
           <NavLink href="/services">Services</NavLink>

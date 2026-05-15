@@ -1,4 +1,5 @@
 import { Container } from "@/components/site/Container";
+import Link from "next/link";
 
 export function SiteFooter() {
   return (
@@ -7,15 +8,21 @@ export function SiteFooter() {
         <p>© {new Date().getFullYear()} Recon Dev LLC. All rights reserved.</p>
 
         <div className="flex flex-wrap gap-4">
-          <a href="/services" className="hover:text-slate-950">
+          <Link href="/services" className="hover:text-slate-950">
             Services
-          </a>
-          <a href="/packages" className="hover:text-slate-950">
+          </Link>
+
+          <Link href="/projects" className="hover:text-slate-950">
+            Projects
+          </Link>
+
+          <Link href="/packages" className="hover:text-slate-950">
             Packages
-          </a>
-          <a href="/contact" className="hover:text-slate-950">
+          </Link>
+
+          <Link href="/contact" className="hover:text-slate-950">
             Contact
-          </a>
+          </Link>
         </div>
       </Container>
     </footer>

@@ -2,6 +2,7 @@ import { services } from "@/data/home";
 import { CardGridItem } from "@/components/site/CardGridItem";
 import { Container } from "@/components/site/Container";
 import { PageHero } from "@/components/site/PageHero";
+import { SiteHeader } from "@/components/site/SiteHeader";
 
 export const metadata = {
   title: "Services | Recon Dev LLC",
@@ -12,6 +13,7 @@ export const metadata = {
 export default function ServicesPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-950">
+      <SiteHeader />
       <PageHero
         eyebrow="Services"
         title="Practical technical services for small teams, builders, and inventors"
