@@ -8,23 +8,23 @@ export function SiteFooter() {
         <p>© {new Date().getFullYear()} Recon Dev LLC. All rights reserved.</p>
 
         <div className="flex flex-wrap gap-4">
-          <Link href="/services" className="hover:text-slate-950">
+          <Link href="/services" prefetch={false} className="hover:text-slate-950">
             Services
           </Link>
 
-          <Link href="/projects" className="hover:text-slate-950">
+          <Link href="/projects" prefetch={false} className="hover:text-slate-950">
             Projects
           </Link>
 
-          <Link href="/packages" className="hover:text-slate-950">
+          <Link href="/packages" prefetch={false} className="hover:text-slate-950">
             Packages
           </Link>
 
-          <Link href="/process" className="hover:text-slate-950">
+          <Link href="/process" prefetch={false} className="hover:text-slate-950">
             Process
           </Link>
 
-          <Link href="/contact" className="hover:text-slate-950">
+          <Link href="/contact" prefetch={false} className="hover:text-slate-950">
             Contact
           </Link>
         </div>

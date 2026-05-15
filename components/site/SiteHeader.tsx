@@ -15,6 +15,7 @@ function NavLink({
   return (
     <Link
       href={href}
+      prefetch={false}
       className="text-sm font-medium text-slate-600 transition hover:text-slate-950"
     >
       {children}
