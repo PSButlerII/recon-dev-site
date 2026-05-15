@@ -15,6 +15,10 @@ export const metadata: Metadata = {
     "systems review",
     "small business technology support",
   ],
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
   authors: [{ name: "Recon Dev LLC" }],
   creator: "Recon Dev LLC",
   openGraph: {
