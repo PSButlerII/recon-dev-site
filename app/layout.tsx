@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: "Recon Dev LLC | Research, Build, Support",
   description:
     "Recon Dev LLC provides practical IT support, web development, systems review, research documentation, and prototype planning for small businesses, startups, inventors, and hands-on operators.",
+    icons: {
+      icon: "/favicon.ico",
+      shortcut: "/favicon.ico",
+    },
   keywords: [
     "Recon Dev LLC",
     "IT support",
@@ -15,10 +19,6 @@ export const metadata: Metadata = {
     "systems review",
     "small business technology support",
   ],
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-  },
   authors: [{ name: "Recon Dev LLC" }],
   creator: "Recon Dev LLC",
   openGraph: {
