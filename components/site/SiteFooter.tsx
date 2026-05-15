@@ -20,6 +20,10 @@ export function SiteFooter() {
             Packages
           </Link>
 
+          <Link href="/process" className="hover:text-slate-950">
+            Process
+          </Link>
+
           <Link href="/contact" className="hover:text-slate-950">
             Contact
           </Link>
