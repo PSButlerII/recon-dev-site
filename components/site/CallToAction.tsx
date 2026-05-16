@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/site/Container";
+import { ButtonLink } from "@/components/site/ButtonLink";
 
 type CallToActionProps = {
   eyebrow?: string;
@@ -30,13 +31,9 @@ export function CallToAction({
             <p className="mt-4 max-w-3xl leading-7 text-slate-300">{text}</p>
           </div>
 
-          <Link
-            href={buttonHref}
-            prefetch={false}
-            className="inline-flex items-center justify-center rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-slate-950 shadow-sm transition hover:bg-slate-100"
-          >
+          <ButtonLink href={buttonHref} variant="light">
             {buttonText}
-          </Link>
+          </ButtonLink>
         </div>
       </Container>
     </section>

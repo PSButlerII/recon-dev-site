@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { CallToAction } from "@/components/site/CallToAction";
 import { PageShell } from "@/components/site/PageShell";
 export const metadata = {
-  title: "Process | Recon Dev LLC",
+  title: "Process",
   description:
     "Learn the Recon Dev LLC process: ask simple questions, research the problem, build a practical solution, then refine and support it.",
 };

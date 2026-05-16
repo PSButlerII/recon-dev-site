@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { CallToAction } from "@/components/site/CallToAction";
 import { PageShell } from "@/components/site/PageShell";
 export const metadata = {
-  title: "Services | Recon Dev LLC",
+  title: "Services",
   description:
     "Explore Recon Dev LLC services including IT support, web development, systems review, security review, research documentation, and prototype planning.",
 };

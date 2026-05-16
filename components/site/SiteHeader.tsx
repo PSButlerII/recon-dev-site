@@ -4,6 +4,8 @@ import { Menu, Sparkles, X } from "lucide-react";
 import { useState } from "react";
 import { Container } from "@/components/site/Container";
 import Link from "next/link";
+import { siteConfig } from "@/data/site";
+import { ButtonLink } from "@/components/site/ButtonLink";
 
 function NavLink({
   href,
@@ -35,30 +37,22 @@ export function SiteHeader() {
           </div>
 
           <div>
-            <p className="text-base font-bold leading-none">Recon Dev LLC</p>
+            <p className="text-base font-bold leading-none">{siteConfig.name}</p>
             <p className="mt-1 text-xs text-slate-500">
-              Research. Build. Support.
+              {siteConfig.tagline}
             </p>
           </div>
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex">
-          <NavLink href="/services">Services</NavLink>
-          <NavLink href="/projects">Projects</NavLink>
-          <NavLink href="/about">About</NavLink>
-          <NavLink href="/process">Process</NavLink>
-          <NavLink href="/packages">Packages</NavLink>
-          <NavLink href="/contact">Contact</NavLink>
+          {siteConfig.nav.map((item) => (
+            <NavLink key={item.href} href={item.href}>
+              {item.label}
+            </NavLink>
+          ))}
         </nav>
 
-        <div className="hidden md:block">
-          <a
-            href="#contact"
-            className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800"
-          >
-            Start a Project
-          </a>
-        </div>
+        <ButtonLink href="/contact">Start a Project</ButtonLink>
 
         <button
           type="button"
@@ -71,15 +65,12 @@ export function SiteHeader() {
       </Container>
 
       {mobileOpen ? (
-        <div className="border-t border-slate-200 bg-white px-5 py-4 md:hidden">
-          <div className="flex flex-col gap-4">
-            <NavLink href="/services">Services</NavLink>
-            <NavLink href="/projects">Projects</NavLink>
-            <NavLink href="/about">About</NavLink>
-            <NavLink href="/process">Process</NavLink>
-            <NavLink href="/packages">Packages</NavLink>
-            <NavLink href="/contact">Contact</NavLink>
-          </div>
+       <div className="flex flex-col gap-4">
+          {siteConfig.nav.map((item) => (
+            <NavLink key={item.href} href={item.href}>
+              {item.label}
+            </NavLink>
+          ))}
         </div>
       ) : null}
     </header>

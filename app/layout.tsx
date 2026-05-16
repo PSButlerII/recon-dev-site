@@ -1,33 +1,27 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/data/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Recon Dev LLC | Research, Build, Support",
-  description:
-    "Recon Dev LLC provides practical IT support, web development, systems review, research documentation, and prototype planning for small businesses, startups, inventors, and hands-on operators.",
-    icons: {
-      icon: "/favicon.ico",
-      shortcut: "/favicon.ico",
-    },
-  keywords: [
-    "Recon Dev LLC",
-    "IT support",
-    "web development",
-    "software development",
-    "technical support",
-    "prototype planning",
-    "systems review",
-    "small business technology support",
-  ],
-  authors: [{ name: "Recon Dev LLC" }],
-  creator: "Recon Dev LLC",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.name} | ${siteConfig.tagline}`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
   openGraph: {
-    title: "Recon Dev LLC | Research, Build, Support",
-    description:
-      "Practical technical help for small businesses, inventors, startups, and hands-on operators.",
+    title: `${siteConfig.name} | ${siteConfig.tagline}`,
+    description: siteConfig.description,
     type: "website",
     locale: "en_US",
-    siteName: "Recon Dev LLC",
+    siteName: siteConfig.name,
+    url: siteConfig.url,
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
   },
 };
 

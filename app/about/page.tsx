@@ -2,7 +2,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { PageShell } from "@/components/site/PageShell";
 export const metadata = {
-  title: "About | Recon Dev LLC",
+  title: "About",
   description:
     "Learn about Recon Dev LLC, a practical research, development, IT support, software, and prototyping company helping small businesses, inventors, and hands-on operators.",
 };

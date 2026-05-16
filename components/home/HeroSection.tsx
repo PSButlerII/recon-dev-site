@@ -3,6 +3,7 @@
 import { ArrowRight, CheckCircle2, Lightbulb, Wrench } from "lucide-react";
 import { motion } from "framer-motion";
 import { process } from "@/data/home";
+import { ButtonLink } from "@/components/site/ButtonLink";
 
 function PrimaryButton({
   href,
@@ -66,11 +67,13 @@ export function HeroSection() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <PrimaryButton href="#contact">
+           <ButtonLink href="/contact">
               Request a consultation <ArrowRight className="ml-2 h-4 w-4" />
-            </PrimaryButton>
+            </ButtonLink>
 
-            <SecondaryButton href="#services">Explore services</SecondaryButton>
+            <ButtonLink href="/services" variant="secondary">
+              Explore services
+            </ButtonLink>
           </div>
 
           <div className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-3">

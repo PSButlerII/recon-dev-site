@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { PageShell } from "@/components/site/PageShell";
 export const metadata = {
-  title: "Contact | Recon Dev LLC",
+  title: "Contact",
   description:
     "Contact Recon Dev LLC for IT support, software development, systems review, documentation, research, or prototype planning.",
 };

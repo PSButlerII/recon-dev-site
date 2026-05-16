@@ -7,7 +7,7 @@ import { CallToAction } from "@/components/site/CallToAction";
 import { PageShell } from "@/components/site/PageShell";
 
 export const metadata = {
-  title: "Packages | Recon Dev LLC",
+  title: "Packages",
   description:
     "Review Recon Dev LLC service packages for starter support, project buildouts, systems review, IT support, software development, and technical planning.",
 };
