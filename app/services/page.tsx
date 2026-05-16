@@ -3,6 +3,7 @@ import { CardGridItem } from "@/components/site/CardGridItem";
 import { Container } from "@/components/site/Container";
 import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
+import { CallToAction } from "@/components/site/CallToAction";
 
 export const metadata = {
   title: "Services | Recon Dev LLC",
@@ -37,6 +38,13 @@ export default function ServicesPage() {
           </div>
         </Container>
       </section>
+      <CallToAction
+        eyebrow="Need help choosing?"
+        title="You do not need to know the exact service before reaching out."
+        text="Describe the goal and the blocker. Recon Dev can help sort whether the right next step is support, software, documentation, research, or prototype planning."
+        buttonText="Start with a project inquiry"
+        buttonHref="/contact"
+      />
     </main>
   );
 }

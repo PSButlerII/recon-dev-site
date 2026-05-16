@@ -3,6 +3,7 @@ import { CheckCircle2 } from "lucide-react";
 import { Container } from "@/components/site/Container";
 import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
+import { CallToAction } from "@/components/site/CallToAction";
 
 export const metadata = {
   title: "Packages | Recon Dev LLC",
@@ -61,34 +62,13 @@ export default function PackagesPage() {
         </Container>
       </section>
 
-      <section className="border-y border-slate-200 bg-white py-20">
-        <Container>
-          <div className="grid gap-8 rounded-3xl bg-slate-950 p-8 text-white md:grid-cols-[1fr_0.7fr] md:items-center">
-            <div>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-400">
-                Not sure where you fit?
-              </p>
-
-              <h2 className="text-3xl font-bold tracking-tight">
-                Start with the problem, not the package.
-              </h2>
-
-              <p className="mt-4 leading-7 text-slate-300">
-                Many technical problems do not fit neatly into a service box.
-                Send the goal, the blocker, and what you have already tried.
-                Recon Dev can help identify the right path.
-              </p>
-            </div>
-
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-slate-950 shadow-sm transition hover:bg-slate-100"
-            >
-              Request a consultation
-            </a>
-          </div>
-        </Container>
-      </section>
+      <CallToAction
+          eyebrow="Not sure where you fit?"
+          title="Start with the problem, not the package."
+          text="Many technical problems do not fit neatly into a service box. Send the goal, the blocker, and what you have already tried. Recon Dev can help identify the right path."
+          buttonText="Request a consultation"
+          buttonHref="/contact"
+        />
     </main>
   );
 }

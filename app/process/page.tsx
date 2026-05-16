@@ -2,6 +2,7 @@ import { process } from "@/data/home";
 import { Container } from "@/components/site/Container";
 import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
+import { CallToAction } from "@/components/site/CallToAction";
 
 export const metadata = {
   title: "Process | Recon Dev LLC",
@@ -62,6 +63,13 @@ export default function ProcessPage() {
           </div>
         </Container>
       </section>
+      <CallToAction
+        eyebrow="Have a project like this?"
+        title="Turn the rough idea into a practical next step."
+        text="Whether it is a web app, workflow, prototype plan, or troubleshooting problem, Recon Dev can help define the path and build from there."
+        buttonText="Discuss a project"
+        buttonHref="/contact"
+      />
     </main>
   );
 }
