@@ -2,7 +2,7 @@ import { ContactSection } from "@/components/home/ContactSection";
 import { PageHero } from "@/components/site/PageHero";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
-
+import { PageShell } from "@/components/site/PageShell";
 export const metadata = {
   title: "Contact | Recon Dev LLC",
   description:
@@ -11,8 +11,8 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-950">
-        <SiteHeader />
+    <PageShell>
+      <SiteHeader />
       <PageHero
   eyebrow="Contact"
   title="Tell Recon Dev what you are trying to build, fix, or understand"
@@ -23,6 +23,6 @@ export default function ContactPage() {
 
       <ContactSection />
       <SiteFooter />
-    </main>
+    </PageShell>
   );
 }

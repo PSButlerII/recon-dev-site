@@ -1,6 +1,6 @@
 import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
-
+import { PageShell } from "@/components/site/PageShell";
 export const metadata = {
   title: "About | Recon Dev LLC",
   description:
@@ -9,14 +9,14 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-950">
-        <SiteHeader />
+    <PageShell>
+      <SiteHeader />
       <PageHero
-        eyebrow="About Recon Dev"
-        title="Built around practical problem solving, research, and real-world support"
-      >
-        Recon Dev LLC exists to help people move from scattered problems to clear next
-        steps, working systems, and usable documentation.
+      eyebrow="About Recon Dev"
+      title="Built around practical problem solving, research, and real-world support"
+    >
+      Recon Dev LLC exists to help people move from scattered problems to clear next
+      steps, working systems, and usable documentation.
     </PageHero>
 
       <section className="mx-auto grid max-w-7xl gap-8 px-5 py-20 lg:grid-cols-[0.9fr_1.1fr]">
@@ -76,6 +76,6 @@ export default function AboutPage() {
           </p>
         </div>
       </section>
-    </main>
+    </PageShell>
   );
 }

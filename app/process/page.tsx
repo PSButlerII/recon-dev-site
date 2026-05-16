@@ -3,7 +3,7 @@ import { Container } from "@/components/site/Container";
 import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { CallToAction } from "@/components/site/CallToAction";
-
+import { PageShell } from "@/components/site/PageShell";
 export const metadata = {
   title: "Process | Recon Dev LLC",
   description:
@@ -12,8 +12,8 @@ export const metadata = {
 
 export default function ProcessPage() {
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-950">
-        <SiteHeader />
+    <PageShell>
+      <SiteHeader />
       <PageHero
         eyebrow="Process"
         title="A practical process for turning unclear problems into usable solutions"
@@ -70,6 +70,6 @@ export default function ProcessPage() {
         buttonText="Discuss a project"
         buttonHref="/contact"
       />
-    </main>
+    </PageShell>
   );
 }

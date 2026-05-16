@@ -4,6 +4,7 @@ import { Container } from "@/components/site/Container";
 import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { CallToAction } from "@/components/site/CallToAction";
+import { PageShell } from "@/components/site/PageShell";
 
 export const metadata = {
   title: "Packages | Recon Dev LLC",
@@ -13,7 +14,7 @@ export const metadata = {
 
 export default function PackagesPage() {
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-950">
+    <PageShell>
       <SiteHeader />
       <PageHero
         eyebrow="Packages"
@@ -69,6 +70,6 @@ export default function PackagesPage() {
           buttonText="Request a consultation"
           buttonHref="/contact"
         />
-    </main>
+    </PageShell>
   );
 }
