@@ -42,9 +42,16 @@ function SecondaryButton({
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden border-b border-slate-200 bg-white">
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute left-[-10rem] top-[-10rem] h-[24rem] w-[24rem] rounded-full bg-slate-200/40 blur-3xl" />
+
+        <div className="absolute right-[-8rem] top-[10rem] h-[22rem] w-[22rem] rounded-full bg-slate-300/30 blur-3xl" />
+
+        <div className="absolute bottom-[-12rem] left-1/2 h-[24rem] w-[24rem] -translate-x-1/2 rounded-full bg-slate-400/20 blur-3xl" />
+      </div>
       <div className="absolute left-1/2 top-0 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-slate-100 blur-3xl" />
 
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-20 md:grid-cols-[1.1fr_0.9fr] md:items-center lg:py-28">
+      <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-24 md:grid-cols-[1.1fr_0.9fr] md:items-center lg:py-32">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -96,7 +103,7 @@ export function HeroSection() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.55, delay: 0.1 }}
         >
-          <div className="rounded-[2rem] border border-slate-800 bg-slate-950 p-7 text-white shadow-2xl">
+          <div className="rounded-[2rem] border border-slate-800/80 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 p-7 text-white shadow-2xl">
             <div className="mb-8 flex items-center justify-between">
               <div>
                 <p className="text-sm uppercase tracking-[0.25em] text-slate-400">

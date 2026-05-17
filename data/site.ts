@@ -4,8 +4,10 @@ export const siteConfig = {
   description:
     "Practical technical help for small businesses, startups, inventors, and hands-on operators.",
   url: "https://rcndev.com",
-  contactEmail: "contact@rcndev.com",
-  location: "Rochester, NH",
+  contactEmail: "preston.s.butlert@rcndev.com",
+  location: "Hampton, Ga",
+  logo: "/logo/SpearLogoRemakeV4.png",
+  ogImage: "/opengraph-image",
   nav: [
     { label: "Services", href: "/services" },
     { label: "Projects", href: "/projects" },

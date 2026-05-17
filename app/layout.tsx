@@ -18,6 +18,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     siteName: siteConfig.name,
     url: siteConfig.url,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
   },
   icons: {
     icon: "/favicon.ico",

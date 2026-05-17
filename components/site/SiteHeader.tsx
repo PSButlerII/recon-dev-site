@@ -1,11 +1,12 @@
 "use client";
 
-import { Menu, Sparkles, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Container } from "@/components/site/Container";
 import Link from "next/link";
 import { siteConfig } from "@/data/site";
 import { ButtonLink } from "@/components/site/ButtonLink";
+import { BrandLogo } from "@/components/site/BrandLogo";
 
 function NavLink({
   href,
@@ -31,9 +32,9 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur">
       <Container className="flex items-center justify-between py-4">
-        <Link href="/" className="flex items-center gap-3">
+        {/* <Link href="/" className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-950 text-white shadow-sm">
-            <Sparkles className="h-5 w-5" />
+            <Sparkles className="h-5 w-5" /> 
           </div>
 
           <div>
@@ -42,8 +43,8 @@ export function SiteHeader() {
               {siteConfig.tagline}
             </p>
           </div>
-        </Link>
-
+        </Link> */}
+          <BrandLogo />
         <nav className="hidden items-center gap-7 md:flex">
           {siteConfig.nav.map((item) => (
             <NavLink key={item.href} href={item.href}>
