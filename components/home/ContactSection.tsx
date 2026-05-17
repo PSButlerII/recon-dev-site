@@ -1,14 +1,14 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { submitContactForm } from "@/app/contact/actions";
 
 const initialState = {
   success: false,
   message: "",
 };
-
 export function ContactSection() {
+  const [projectType, setProjectType] = useState("");
   const [state, formAction, isPending] = useActionState(
     submitContactForm,
     initialState
@@ -58,11 +58,107 @@ export function ContactSection() {
               required
             />
 
+            <input
+              name="company"
+              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+              placeholder="Company / Organization"
+              type="text"
+            />
+
+            <select
+              name="projectType"
+              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+              required
+              value={projectType}
+              onChange={(event) => setProjectType(event.target.value)}
+            >
+              <option value="" disabled>
+                Project type
+              </option>
+              <option value="Website">Website</option>
+              <option value="Web Application">Web Application</option>
+              <option value="IT Support">IT Support</option>
+              <option value="Systems Review">Systems Review</option>
+              <option value="Security Review">Security Review</option>
+              <option value="Research / Documentation">Research / Documentation</option>
+              <option value="Prototype Planning">Prototype Planning</option>
+              <option value="Not Sure Yet">Not Sure Yet</option>
+              <option value="Other">Other</option>
+            </select>
+            {projectType === "Other" ? (
+              <input
+                name="projectTypeOther"
+                className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+                placeholder="Briefly describe the project type"
+                type="text"
+                required
+              />
+            ) : null}
+
+            <textarea
+              name="goal"
+              className="min-h-24 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+              placeholder="What are you trying to build, fix, or understand?"
+              required
+            />
+
+            <textarea
+              name="blocker"
+              className="min-h-24 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+              placeholder="What is currently blocking progress?"
+            />
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              <select
+                name="budget"
+                className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  Budget range
+                </option>
+                <option value="Under $250">Under $250</option>
+                <option value="$250 - $750">$250 - $750</option>
+                <option value="$750 - $1,500">$750 - $1,500</option>
+                <option value="$1,500 - $5,000">$1,500 - $5,000</option>
+                <option value="$5,000+">$5,000+</option>
+                <option value="Not Sure">Not Sure</option>
+              </select>
+
+              <select
+                name="timeline"
+                className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  Timeline
+                </option>
+                <option value="ASAP">ASAP</option>
+                <option value="1 - 2 Weeks">1 - 2 Weeks</option>
+                <option value="1 Month">1 Month</option>
+                <option value="2 - 3 Months">2 - 3 Months</option>
+                <option value="Flexible">Flexible</option>
+              </select>
+            </div>
+
+            <select
+              name="preferredContact"
+              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Preferred contact method
+              </option>
+              <option value="Email">Email</option>
+              <option value="Phone">Phone</option>
+              <option value="Text">Text</option>
+              <option value="Video Call">Video Call</option>
+            </select>
+
             <textarea
               name="message"
               className="min-h-28 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
-              placeholder="What are you trying to build, fix, or understand?"
-              required
+              placeholder="Extra details, links, notes, or anything else useful"
             />
 
             {state.message ? (

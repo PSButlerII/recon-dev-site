@@ -16,12 +16,28 @@ export async function submitContactForm(
 ): Promise<ContactFormState> {
   const name = String(formData.get("name") || "").trim();
   const email = String(formData.get("email") || "").trim();
+  const company = String(formData.get("company") || "").trim();
+
+  const projectType = String(formData.get("projectType") || "").trim();
+  const projectTypeOther = String(formData.get("projectTypeOther") || "").trim();
+
+  const finalProjectType =
+    projectType === "Other" && projectTypeOther
+      ? `Other: ${projectTypeOther}`
+      : projectType;
+
+  const goal = String(formData.get("goal") || "").trim();
+  const blocker = String(formData.get("blocker") || "").trim();
+  const budget = String(formData.get("budget") || "").trim();
+  const timeline = String(formData.get("timeline") || "").trim();
+  const preferredContact = String(formData.get("preferredContact") || "").trim();
   const message = String(formData.get("message") || "").trim();
 
-  if (!name || !email || !message) {
+  if (!name || !email || !finalProjectType || !goal) {
     return {
       success: false,
-      message: "Please fill out your name, email, and project message.",
+      message:
+        "Please fill out your name, email, project type, and project goal.",
     };
   }
 
@@ -35,20 +51,34 @@ export async function submitContactForm(
   if (!process.env.CONTACT_TO_EMAIL || !process.env.CONTACT_FROM_EMAIL) {
     return {
       success: false,
-      message: "Email service is not configured. Missing contact email settings.",
+      message:
+        "Email service is not configured. Missing contact email settings.",
     };
   }
+
+  const inquiry = {
+    source: "recon-dev-website",
+    name,
+    email,
+    company,
+    projectType: finalProjectType,
+    goal,
+    blocker,
+    budget,
+    timeline,
+    preferredContact,
+    message,
+    submittedAt: new Date().toISOString(),
+  };
+
+  console.log("New Recon Dev inquiry:", inquiry);
 
   const { error } = await resend.emails.send({
     from: process.env.CONTACT_FROM_EMAIL,
     to: [process.env.CONTACT_TO_EMAIL],
     replyTo: email,
     subject: `New Recon Dev inquiry from ${name}`,
-    react: ContactInquiryEmail({
-      name,
-      email,
-      message,
-    }),
+    react: ContactInquiryEmail(inquiry),
   });
 
   if (error) {
