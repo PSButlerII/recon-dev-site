@@ -2,7 +2,14 @@
 
 import { useActionState, useEffect, useRef, useState } from "react";
 import { submitContactForm } from "@/app/contact/actions";
-
+import { FormField } from "@/components/site/FormField";
+import { formControlClass } from "@/lib/styles";
+import {
+  budgetOptions,
+  preferredContactOptions,
+  projectTypeOptions,
+  timelineOptions,
+} from "@/data/intake";
 
 const initialState = {
   success: false,
@@ -57,32 +64,38 @@ export function ContactSection() {
               aria-hidden="true"
             />
             <input type="hidden" name="source" value="recon-dev-website" />
+            <FormField label="Name" hint="Please enter your full name">
             <input
               name="name"
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+              className={formControlClass}
               placeholder="Name"
               type="text"
               required
             />
+            </FormField>
 
+            <FormField label="Email" hint="We'll use this to contact you about your inquiry">
             <input
               name="email"
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+              className={formControlClass}
               placeholder="Email"
               type="email"
               required
             />
+            </FormField>
 
+            <FormField label="Company / Organization">
             <input
               name="company"
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+              className={formControlClass}
               placeholder="Company / Organization"
               type="text"
             />
+            </FormField>
 
             <select
               name="projectType"
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+              className={formControlClass}
               required
               value={projectType}
               onChange={(event) => setProjectType(event.target.value)}
@@ -90,89 +103,98 @@ export function ContactSection() {
               <option value="" disabled>
                 Project type
               </option>
-              <option value="Website">Website</option>
-              <option value="Web Application">Web Application</option>
-              <option value="IT Support">IT Support</option>
-              <option value="Systems Review">Systems Review</option>
-              <option value="Security Review">Security Review</option>
-              <option value="Research / Documentation">Research / Documentation</option>
-              <option value="Prototype Planning">Prototype Planning</option>
-              <option value="Not Sure Yet">Not Sure Yet</option>
-              <option value="Other">Other</option>
+               {projectTypeOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
             </select>
             {projectType === "Other" ? (
+            <FormField label="Project Type" hint="What type of project are you working on?">
               <input
-                name="projectTypeOther"
-                className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
-                placeholder="Briefly describe the project type"
-                type="text"
-                required
+              name="projectTypeOther"
+              className={`${formControlClass} min-h-24`}
+              placeholder="Briefly describe the project type"
+              type="text"
+              required
               />
+              </FormField>
             ) : null}
 
+            <FormField label="Project Goal" hint="What are you trying to build, fix, or understand?">
             <textarea
               name="goal"
-              className="min-h-24 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+              className={`${formControlClass} min-h-24`}
               placeholder="What are you trying to build, fix, or understand?"
               required
             />
+            </FormField>
+
+            <FormField label="Current Blocker" hint="What is currently blocking progress?">
 
             <textarea
               name="blocker"
-              className="min-h-24 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+              className={`${formControlClass} min-h-24`}
               placeholder="What is currently blocking progress?"
             />
+            </FormField>
+
 
             <div className="grid gap-3 sm:grid-cols-2">
+            <FormField label="Budget" hint="What is your budget range for this project?">
               <select
                 name="budget"
-                className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+                className={formControlClass}
                 defaultValue=""
               >
                 <option value="" disabled>
                   Budget range
-                </option>
-                <option value="Under $250">Under $250</option>
-                <option value="$250 - $750">$250 - $750</option>
-                <option value="$750 - $1,500">$750 - $1,500</option>
-                <option value="$1,500 - $5,000">$1,500 - $5,000</option>
-                <option value="$5,000+">$5,000+</option>
-                <option value="Not Sure">Not Sure</option>
+                </option>                
+                {budgetOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
               </select>
+              </FormField>
+
+              <FormField label="Timeline" hint="When do you hope to have this project completed?">
 
               <select
                 name="timeline"
-                className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+                className={formControlClass}
                 defaultValue=""
               >
                 <option value="" disabled>
                   Timeline
                 </option>
-                <option value="ASAP">ASAP</option>
-                <option value="1 - 2 Weeks">1 - 2 Weeks</option>
-                <option value="1 Month">1 Month</option>
-                <option value="2 - 3 Months">2 - 3 Months</option>
-                <option value="Flexible">Flexible</option>
+                {timelineOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
               </select>
+              </FormField>
             </div>
 
             <select
               name="preferredContact"
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+              className={formControlClass}
               defaultValue=""
             >
               <option value="" disabled>
                 Preferred contact method
               </option>
-              <option value="Email">Email</option>
-              <option value="Phone">Phone</option>
-              <option value="Text">Text</option>
-              <option value="Video Call">Video Call</option>
+              {preferredContactOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
             </select>
 
             <textarea
               name="message"
-              className="min-h-28 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
+              className={formControlClass}
               placeholder="Extra details, links, notes, or anything else useful"
             />
 
@@ -197,7 +219,7 @@ export function ContactSection() {
             <button
               type="submit"
               disabled={isPending}
-              className="w-full rounded-2xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+              className={formControlClass}
             >
               {isPending ? "Sending..." : "Send inquiry"}
             </button>

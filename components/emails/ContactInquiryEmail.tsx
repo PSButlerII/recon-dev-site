@@ -9,22 +9,10 @@ import {
   Section,
   Text,
 } from "@react-email/components";
+import type { ContactInquiry } from "@/types/intake";
+import { toJsonPayload } from "@/lib/intake";
 
-type ContactInquiryEmailProps = {
-  source: string;
-  name: string;
-  email: string;
-  company?: string;
-  projectType: string;
-  goal: string;
-  blocker?: string;
-  budget?: string;
-  timeline?: string;
-  preferredContact?: string;
-  message?: string;
-  submittedAt: string;
-  inquiryId: string;
-};
+type ContactInquiryEmailProps = ContactInquiry;
 
 function Field({
   label,
@@ -57,25 +45,21 @@ export function ContactInquiryEmail({
   submittedAt,
   inquiryId,
 }: ContactInquiryEmailProps) {
-  const jsonPayload = JSON.stringify(
-    {
-      source,
-      name,
-      email,
-      company,
-      projectType,
-      goal,
-      blocker,
-      budget,
-      timeline,
-      preferredContact,
-      message,
-      submittedAt,
-      inquiryId,
-    },
-    null,
-    2
-  );
+  const jsonPayload = toJsonPayload({
+  inquiryId,
+  source,
+  name,
+  email,
+  company,
+  projectType,
+  goal,
+  blocker,
+  budget,
+  timeline,
+  preferredContact,
+  message,
+  submittedAt,
+});
 
   return (
     <Html>
