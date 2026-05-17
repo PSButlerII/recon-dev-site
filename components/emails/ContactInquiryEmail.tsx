@@ -23,6 +23,7 @@ type ContactInquiryEmailProps = {
   preferredContact?: string;
   message?: string;
   submittedAt: string;
+  inquiryId: string;
 };
 
 function Field({
@@ -54,6 +55,7 @@ export function ContactInquiryEmail({
   preferredContact,
   message,
   submittedAt,
+  inquiryId,
 }: ContactInquiryEmailProps) {
   const jsonPayload = JSON.stringify(
     {
@@ -69,6 +71,7 @@ export function ContactInquiryEmail({
       preferredContact,
       message,
       submittedAt,
+      inquiryId,
     },
     null,
     2
@@ -94,6 +97,7 @@ export function ContactInquiryEmail({
           <Section>
             <Field label="Name" value={name} />
             <Field label="Email" value={email} />
+            <Field label="Inquiry ID" value={inquiryId} />
             <Field label="Company / Organization" value={company} />
             <Field label="Project Type" value={projectType} />
             <Field label="Budget" value={budget} />

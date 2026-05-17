@@ -6,10 +6,16 @@ import { ContactInquiryEmail } from "@/components/emails/ContactInquiryEmail";
 export type ContactFormState = {
   success: boolean;
   message: string;
+  inquiryId?: string;
 };
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+function generateInquiryId() {
+  const timestamp = Date.now().toString(36).toUpperCase();
+  const random = Math.random().toString(36).slice(2, 6).toUpperCase();
 
+  return `RD-${timestamp}-${random}`;
+}
 export async function submitContactForm(
   _previousState: ContactFormState,
   formData: FormData
@@ -32,7 +38,7 @@ export async function submitContactForm(
   const timeline = String(formData.get("timeline") || "").trim();
   const preferredContact = String(formData.get("preferredContact") || "").trim();
   const message = String(formData.get("message") || "").trim();
-
+  const website = String(formData.get("website") || "").trim();
   if (!name || !email || !finalProjectType || !goal) {
     return {
       success: false,
@@ -55,9 +61,16 @@ export async function submitContactForm(
         "Email service is not configured. Missing contact email settings.",
     };
   }
-
+  if (website) {
+    return {
+      success: true,
+      message: "Inquiry sent. Recon Dev will review the project details.",
+    };
+  }
+  const inquiryId = generateInquiryId();
   const inquiry = {
-    source: "recon-dev-website",
+    inquiryId,
+    source: String(formData.get("source") || "recon-dev-website").trim(),
     name,
     email,
     company,
@@ -77,7 +90,7 @@ export async function submitContactForm(
     from: process.env.CONTACT_FROM_EMAIL,
     to: [process.env.CONTACT_TO_EMAIL],
     replyTo: email,
-    subject: `New Recon Dev inquiry from ${name}`,
+    subject: `[${inquiryId}] New Recon Dev inquiry from ${name}`,
     react: ContactInquiryEmail(inquiry),
   });
 
@@ -92,6 +105,7 @@ export async function submitContactForm(
 
   return {
     success: true,
-    message: "Inquiry sent. Recon Dev will review the project details.",
+    message: `Inquiry sent. Recon Dev will review the project details. Reference ID: ${inquiryId}`,
+    inquiryId,
   };
 }

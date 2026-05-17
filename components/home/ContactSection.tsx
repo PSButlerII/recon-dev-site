@@ -1,19 +1,25 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { submitContactForm } from "@/app/contact/actions";
+
 
 const initialState = {
   success: false,
   message: "",
+  inquiryId: "",
 };
 export function ContactSection() {
   const [projectType, setProjectType] = useState("");
-  const [state, formAction, isPending] = useActionState(
-    submitContactForm,
-    initialState
+  const [state, formAction, isPending] = useActionState(submitContactForm, initialState
   );
-
+  const formRef = useRef<HTMLFormElement>(null);
+  useEffect(() => {
+  if (state.success) {
+    formRef.current?.reset();
+    setProjectType("");
+  }
+}, [state.success]);
   return (
     <section id="contact" className="mx-auto max-w-7xl px-5 py-20">
       <div className="grid gap-8 rounded-[2rem] bg-slate-950 p-8 text-white md:grid-cols-[1fr_0.8fr] md:p-12">
@@ -33,7 +39,7 @@ export function ContactSection() {
           </p>
         </div>
 
-        <form action={formAction} className="rounded-3xl bg-white p-6 text-slate-950">
+        <form ref={formRef} action={formAction} className="rounded-3xl bg-white p-6 text-slate-950">
           <h3 className="text-xl font-bold">Project inquiry</h3>
 
           <p className="mt-2 text-sm leading-6 text-slate-600">
@@ -42,6 +48,15 @@ export function ContactSection() {
           </p>
 
           <div className="mt-5 space-y-3">
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              className="hidden"
+              aria-hidden="true"
+            />
+            <input type="hidden" name="source" value="recon-dev-website" />
             <input
               name="name"
               className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-950"
