@@ -5,6 +5,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { CallToAction } from "@/components/site/CallToAction";
 import { PageShell } from "@/components/site/PageShell";
+import { Section } from "@/components/site/Section";
 
 export const metadata = {
   title: "Packages",
@@ -25,7 +26,7 @@ export default function PackagesPage() {
         documentation.
       </PageHero>
 
-      <section className="py-20">
+      <Section>
         <Container>
           <div className="grid gap-6 lg:grid-cols-3">
             {packages.map((item) => (
@@ -61,7 +62,7 @@ export default function PackagesPage() {
             ))}
           </div>
         </Container>
-      </section>
+      </Section>
 
       <CallToAction
           eyebrow="Not sure where you fit?"

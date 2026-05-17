@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/site/Container";
 import { ButtonLink } from "@/components/site/ButtonLink";
+import { Section } from "./Section";
 
 type CallToActionProps = {
   eyebrow?: string;
@@ -18,7 +19,7 @@ export function CallToAction({
   buttonHref = "/contact",
 }: CallToActionProps) {
   return (
-    <section className="border-y border-slate-200 bg-white py-20">
+    <Section background="white" className="border-y border-slate-200">
       <Container>
         <div className="grid gap-8 rounded-3xl bg-slate-950 p-8 text-white md:grid-cols-[1fr_0.7fr] md:items-center md:p-12">
           <div>
@@ -36,6 +37,6 @@ export function CallToAction({
           </ButtonLink>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

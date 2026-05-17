@@ -4,6 +4,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { CallToAction } from "@/components/site/CallToAction";
 import { PageShell } from "@/components/site/PageShell";
+import { Section } from "@/components/site/Section";
 export const metadata = {
   title: "Process",
   description:
@@ -22,7 +23,7 @@ export default function ProcessPage() {
         builds the simplest useful version, tests it, and improves from there.
       </PageHero>
 
-      <section className="py-20">
+      <Section>
         <Container>
           <div className="grid gap-6 md:grid-cols-2">
             {process.map((step, index) => (
@@ -41,9 +42,9 @@ export default function ProcessPage() {
             ))}
           </div>
         </Container>
-      </section>
+      </Section>
 
-      <section className="border-y border-slate-200 bg-white py-20">
+      <Section background="white" className="border-y border-slate-200">
         <Container>
           <div className="rounded-3xl bg-slate-950 p-8 text-white md:p-12">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-400">
@@ -62,7 +63,7 @@ export default function ProcessPage() {
             </p>
           </div>
         </Container>
-      </section>
+      </Section>
       <CallToAction
         eyebrow="Have a project like this?"
         title="Turn the rough idea into a practical next step."

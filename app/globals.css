@@ -8,3 +8,15 @@ body {
   margin: 0;
   background: #f8fafc;
 }
+
+:root {
+  --font-sans: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans), sans-serif;
+}

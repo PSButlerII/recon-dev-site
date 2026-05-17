@@ -1,6 +1,7 @@
 import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { PageShell } from "@/components/site/PageShell";
+import { Section } from "@/components/site/Section";
 export const metadata = {
   title: "About",
   description:
@@ -55,7 +56,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-y border-slate-200 bg-white px-5 py-20">
+      <Section background="white" className="border-y border-slate-200">
         <div className="mx-auto max-w-5xl">
           <h2 className="text-3xl font-bold tracking-tight">
             Why Recon Dev is different
@@ -75,7 +76,7 @@ export default function AboutPage() {
             that path with clear communication.
           </p>
         </div>
-      </section>
+      </Section>
     </PageShell>
   );
 }

@@ -5,6 +5,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { CallToAction } from "@/components/site/CallToAction";
 import { PageShell } from "@/components/site/PageShell";
+import { Section } from "@/components/site/Section";
 export const metadata = {
   title: "Services",
   description:
@@ -23,7 +24,7 @@ export default function ServicesPage() {
         systems, documentation, and supportable solutions.
       </PageHero>
 
-      <section className="py-20">
+      <Section>
         <Container>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
@@ -37,7 +38,7 @@ export default function ServicesPage() {
             ))}
           </div>
         </Container>
-      </section>
+      </Section>
       <CallToAction
         eyebrow="Need help choosing?"
         title="You do not need to know the exact service before reaching out."

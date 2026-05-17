@@ -5,6 +5,8 @@ import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { CallToAction } from "@/components/site/CallToAction";
 import { PageShell } from "@/components/site/PageShell";
+import { Section } from "@/components/site/Section";
+
 export const metadata = {
   title: "Projects",
   description:
@@ -23,7 +25,7 @@ export default function ProjectsPage() {
         clear view of the project categories Recon Dev can support.
       </PageHero>
 
-      <section className="py-20">
+      <Section>
         <Container>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
@@ -37,7 +39,7 @@ export default function ProjectsPage() {
             ))}
           </div>
         </Container>
-      </section>
+      </Section>
       <CallToAction
         eyebrow="Have a project like this?"
         title="Turn the rough idea into a practical next step."
