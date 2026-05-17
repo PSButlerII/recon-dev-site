@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import { Badge } from "@/components/site/Badge";
 
 type CardGridItemProps = {
   icon: LucideIcon;
@@ -25,12 +26,7 @@ export function CardGridItem({
 
       <div className="mt-6 flex flex-wrap gap-2">
         {tags.map((tag) => (
-          <span
-            key={tag}
-            className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600"
-          >
-            {tag}
-          </span>
+          <Badge key={tag}>{tag}</Badge>
         ))}
       </div>
     </article>

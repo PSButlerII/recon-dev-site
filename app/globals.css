@@ -20,3 +20,19 @@ html {
 body {
   font-family: var(--font-sans), sans-serif;
 }
+body {
+  background:
+    radial-gradient(circle at top, rgba(148, 163, 184, 0.08), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(148, 163, 184, 0.06), transparent 30%),
+    #f8fafc;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: #0f172a;
+  color: white;
+}
