@@ -7,6 +7,8 @@ import { toCrmPayload, toEmailSubject } from "@/lib/intake";
 import { sendInquiryToCrm } from "@/lib/crm";
 import { canSubmit } from "@/lib/security";
 import { parseContactForm } from "@/lib/parse-contact-form";
+import { validateContactForm } from "@/lib/validate-contact-form";
+import { getEmailConfig } from "@/lib/env";
 
 export type ContactFormState = {
   success: boolean;
@@ -23,15 +25,17 @@ function generateInquiryId() {
   return `RD-${timestamp}-${random}`;
 }
 
-function isValidEmail(email: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
 export async function submitContactForm(
   _previousState: ContactFormState,
   formData: FormData
 ): Promise<ContactFormState> {
   const { website, ...parsedInquiry } = parseContactForm(formData);
+  const emailConfig = getEmailConfig();
+  const validation = validateContactForm({
+  website,
+  ...parsedInquiry,
+  
+});
 
   if (website) {
     return {
@@ -53,10 +57,10 @@ export async function submitContactForm(
     };
   }
 
-  if (!isValidEmail(parsedInquiry.email)) {
+  if (!validation.valid) {
     return {
       success: false,
-      message: "Please enter a valid email address.",
+      message: validation.message,
     };
   }
 
@@ -67,18 +71,12 @@ export async function submitContactForm(
     };
   }
 
-  if (!process.env.RESEND_API_KEY) {
-    return {
-      success: false,
-      message: "Email service is not configured. Missing RESEND_API_KEY.",
-    };
-  }
+ 
 
-  if (!process.env.CONTACT_TO_EMAIL || !process.env.CONTACT_FROM_EMAIL) {
+  if (!emailConfig.valid) {
     return {
       success: false,
-      message:
-        "Email service is not configured. Missing contact email settings.",
+      message: emailConfig.message,
     };
   }
 
@@ -94,8 +92,8 @@ export async function submitContactForm(
   console.log("CRM Payload:", toCrmPayload(inquiry));
 
   const { error } = await resend.emails.send({
-    from: process.env.CONTACT_FROM_EMAIL,
-    to: [process.env.CONTACT_TO_EMAIL],
+    from: emailConfig.fromEmail,
+    to: [emailConfig.toEmail],
     replyTo: inquiry.email,
     subject: toEmailSubject(inquiry),
     react: ContactInquiryEmail(inquiry),
