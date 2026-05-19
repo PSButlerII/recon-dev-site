@@ -17,6 +17,7 @@ export const siteConfig = {
     { label: "Contact", href: "/contact" },
   ],
   footerNav: [
-  { label: "Privacy", href: "/privacy" },
+    { label: "Privacy", href: "/privacy" },
+    { label: "Terms", href: "/terms" },
   ],
 };
