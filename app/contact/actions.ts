@@ -8,6 +8,7 @@ import { parseContactForm } from "@/lib/parse-contact-form";
 import { validateContactForm } from "@/lib/validate-contact-form";
 import { logError, logInfo } from "@/lib/logger";
 import { sendContactInquiryEmail } from "@/lib/email";
+import { buildContactInquiry } from "@/lib/build-contact-inquiry";
 
 export type ContactFormState = {
   success: boolean;
@@ -15,12 +16,7 @@ export type ContactFormState = {
   inquiryId?: string;
 };
 
-function generateInquiryId() {
-  const timestamp = Date.now().toString(36).toUpperCase();
-  const random = Math.random().toString(36).slice(2, 6).toUpperCase();
 
-  return `RD-${timestamp}-${random}`;
-}
 
 export async function submitContactForm(
   _previousState: ContactFormState,
@@ -54,13 +50,7 @@ export async function submitContactForm(
     };
   }
 
-  const inquiryId = generateInquiryId();
-
-  const inquiry: ContactInquiry = {
-    inquiryId,
-    ...parsedInquiry,
-    submittedAt: new Date().toISOString(),
-  };
+const inquiry = buildContactInquiry(parsedInquiry);
 
   logInfo("New Recon Dev inquiry", inquiry);
   logInfo("CRM Payload", toCrmPayload(inquiry));
@@ -68,13 +58,11 @@ export async function submitContactForm(
   const emailResult = await sendContactInquiryEmail(inquiry);
 
   if (!emailResult.success) {
-    logError("Resend contact form error", emailResult.error);
-
-    return {
-      success: false,
-      message: emailResult.message,
-    };
-  }
+  return {
+    success: false,
+    message: emailResult.message,
+  };
+}
 
   try {
     await sendInquiryToCrm(inquiry);
@@ -84,7 +72,7 @@ export async function submitContactForm(
 
   return {
     success: true,
-    message: `Inquiry sent. Recon Dev will review the project details. Reference ID: ${inquiryId}`,
-    inquiryId,
+    message: `Inquiry sent. Recon Dev will review the project details. Reference ID: ${inquiry.inquiryId}`,
+    inquiryId: inquiry.inquiryId,
   };
 }

@@ -3,10 +3,23 @@ import { ContactInquiryEmail } from "@/components/emails/ContactInquiryEmail";
 import type { ContactInquiry } from "@/types/intake";
 import { getEmailConfig } from "@/lib/env";
 import { toEmailSubject } from "@/lib/intake";
+import { logError } from "@/lib/logger";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function sendContactInquiryEmail(inquiry: ContactInquiry) {
+export type SendEmailResult =
+  | {
+      success: true;
+      message: string;
+    }
+  | {
+      success: false;
+      message: string;
+    };
+
+export async function sendContactInquiryEmail(
+  inquiry: ContactInquiry
+): Promise<SendEmailResult> {
   const emailConfig = getEmailConfig();
 
   if (!emailConfig.valid) {
@@ -25,10 +38,11 @@ export async function sendContactInquiryEmail(inquiry: ContactInquiry) {
   });
 
   if (error) {
+    logError("Resend contact form error", error);
+
     return {
       success: false,
       message: "Something went wrong sending the inquiry. Please try again.",
-      error,
     };
   }
 
