@@ -1,23 +1,19 @@
 "use server";
 
-import { Resend } from "resend";
-import { ContactInquiryEmail } from "@/components/emails/ContactInquiryEmail";
 import type { ContactInquiry } from "@/types/intake";
-import { toCrmPayload, toEmailSubject } from "@/lib/intake";
+import { toCrmPayload } from "@/lib/intake";
 import { sendInquiryToCrm } from "@/lib/crm";
 import { canSubmit } from "@/lib/security";
 import { parseContactForm } from "@/lib/parse-contact-form";
 import { validateContactForm } from "@/lib/validate-contact-form";
-import { getEmailConfig } from "@/lib/env";
 import { logError, logInfo } from "@/lib/logger";
+import { sendContactInquiryEmail } from "@/lib/email";
 
 export type ContactFormState = {
   success: boolean;
   message: string;
   inquiryId?: string;
 };
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 function generateInquiryId() {
   const timestamp = Date.now().toString(36).toUpperCase();
@@ -31,12 +27,6 @@ export async function submitContactForm(
   formData: FormData
 ): Promise<ContactFormState> {
   const { website, ...parsedInquiry } = parseContactForm(formData);
-  const emailConfig = getEmailConfig();
-  const validation = validateContactForm({
-  website,
-  ...parsedInquiry,
-  
-});
 
   if (website) {
     return {
@@ -45,18 +35,10 @@ export async function submitContactForm(
     };
   }
 
-  if (
-    !parsedInquiry.name ||
-    !parsedInquiry.email ||
-    !parsedInquiry.projectType ||
-    !parsedInquiry.goal
-  ) {
-    return {
-      success: false,
-      message:
-        "Please fill out your name, email, project type, and project goal.",
-    };
-  }
+  const validation = validateContactForm({
+    website,
+    ...parsedInquiry,
+  });
 
   if (!validation.valid) {
     return {
@@ -72,15 +54,6 @@ export async function submitContactForm(
     };
   }
 
- 
-
-  if (!emailConfig.valid) {
-    return {
-      success: false,
-      message: emailConfig.message,
-    };
-  }
-
   const inquiryId = generateInquiryId();
 
   const inquiry: ContactInquiry = {
@@ -92,27 +65,21 @@ export async function submitContactForm(
   logInfo("New Recon Dev inquiry", inquiry);
   logInfo("CRM Payload", toCrmPayload(inquiry));
 
-  const { error } = await resend.emails.send({
-    from: emailConfig.fromEmail,
-    to: [emailConfig.toEmail],
-    replyTo: inquiry.email,
-    subject: toEmailSubject(inquiry),
-    react: ContactInquiryEmail(inquiry),
-  });
+  const emailResult = await sendContactInquiryEmail(inquiry);
 
-  if (error) {
-    logError("Resend contact form error:", error);
+  if (!emailResult.success) {
+    logError("Resend contact form error", emailResult.error);
 
     return {
       success: false,
-      message: "Something went wrong sending the inquiry. Please try again.",
+      message: emailResult.message,
     };
   }
 
   try {
     await sendInquiryToCrm(inquiry);
   } catch (error) {
-    logError("CRM sync failed:", error);
+    logError("CRM sync failed", error);
   }
 
   return {
