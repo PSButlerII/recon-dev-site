@@ -44,7 +44,43 @@ export function ContactSection() {
             tried. Recon Dev can help turn that into a plan, prototype, fix, or
             working system.
           </p>
+          <div className="mt-8 space-y-4 rounded-3xl border border-slate-200 bg-slate-50 p-6">
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+                What happens next
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                After submitting an inquiry, Recon Dev reviews the project details,
+                identifies blockers, and determines whether the request is a good fit for
+                consultation, support, research, development, or prototype planning.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Typical response window
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                Most inquiries receive a response within 1–3 business days depending on
+                project complexity and current workload.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Best inquiries
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                Clear goals, current blockers, links, screenshots, technical details, and
+                examples help accelerate planning and troubleshooting.
+              </p>
+            </div>
+          </div>
         </div>
+        
 
         <form ref={formRef} action={formAction} className="rounded-3xl bg-white p-6 text-slate-950">
           <h3 className="text-xl font-bold">Project inquiry</h3>
