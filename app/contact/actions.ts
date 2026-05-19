@@ -9,6 +9,7 @@ import { canSubmit } from "@/lib/security";
 import { parseContactForm } from "@/lib/parse-contact-form";
 import { validateContactForm } from "@/lib/validate-contact-form";
 import { getEmailConfig } from "@/lib/env";
+import { logError, logInfo } from "@/lib/logger";
 
 export type ContactFormState = {
   success: boolean;
@@ -88,8 +89,8 @@ export async function submitContactForm(
     submittedAt: new Date().toISOString(),
   };
 
-  console.log("New Recon Dev inquiry:", inquiry);
-  console.log("CRM Payload:", toCrmPayload(inquiry));
+  logInfo("New Recon Dev inquiry", inquiry);
+  logInfo("CRM Payload", toCrmPayload(inquiry));
 
   const { error } = await resend.emails.send({
     from: emailConfig.fromEmail,
@@ -100,7 +101,7 @@ export async function submitContactForm(
   });
 
   if (error) {
-    console.error("Resend contact form error:", error);
+    logError("Resend contact form error:", error);
 
     return {
       success: false,
@@ -111,7 +112,7 @@ export async function submitContactForm(
   try {
     await sendInquiryToCrm(inquiry);
   } catch (error) {
-    console.error("CRM sync failed:", error);
+    logError("CRM sync failed:", error);
   }
 
   return {
