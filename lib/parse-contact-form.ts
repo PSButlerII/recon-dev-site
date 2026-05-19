@@ -1,10 +1,17 @@
 import type { ContactInquiry } from "@/types/intake";
 
+export type ParsedContactForm = Omit<
+  ContactInquiry,
+  "inquiryId" | "submittedAt"
+> & {
+  website: string;
+};
+
 function limitText(value: string, maxLength: number) {
   return value.length > maxLength ? value.slice(0, maxLength) : value;
 }
 
-export function parseContactForm(formData: FormData) {
+export function parseContactForm(formData: FormData): ParsedContactForm {
   const name = limitText(String(formData.get("name") || "").trim(), 120);
   const email = limitText(String(formData.get("email") || "").trim(), 180);
   const company = limitText(String(formData.get("company") || "").trim(), 180);
@@ -43,7 +50,10 @@ export function parseContactForm(formData: FormData) {
     120
   );
 
-  const website = String(formData.get("website") || "").trim();
+  const website = limitText(
+    String(formData.get("website") || "").trim(),
+    50
+  );
 
   return {
     website,
