@@ -39,7 +39,20 @@ export function SiteFooter() {
                 {item.label}
               </Link>
             ))}
+            <div className="mt-6 flex flex-wrap gap-4">
+              {siteConfig.footerNav.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  prefetch={false}
+                  className="text-sm text-slate-500 transition hover:text-slate-950"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
           </div>
+          
         </div>
 
         <div className="mt-10 border-t border-slate-200 pt-6 text-sm text-slate-500">
