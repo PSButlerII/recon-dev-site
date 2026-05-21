@@ -72,7 +72,8 @@ const inquiry = buildContactInquiry(parsedInquiry);
 
   return {
     success: true,
-    message: `Inquiry sent. Recon Dev will review the project details. Reference ID: ${inquiry.inquiryId}`,
+    message:
+      "Inquiry received. Recon Dev will review the details and follow up if the request is a good fit.",
     inquiryId: inquiry.inquiryId,
   };
 }

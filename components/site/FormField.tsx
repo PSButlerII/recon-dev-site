@@ -4,13 +4,20 @@ type FormFieldProps = {
   label: string;
   children: ReactNode;
   hint?: string;
+  required?: boolean;
 };
 
-export function FormField({ label, children, hint }: FormFieldProps) {
+export function FormField({
+  label,
+  children,
+  hint,
+  required = false,
+}: FormFieldProps) {
   return (
     <label className="block">
       <span className="mb-1.5 block text-sm font-semibold text-slate-700">
         {label}
+        {required ? <span className="ml-1 text-red-500">*</span> : null}
       </span>
 
       {children}

@@ -3,13 +3,17 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 import { submitContactForm } from "@/app/contact/actions";
 import { FormField } from "@/components/site/FormField";
-import { formControlClass } from "@/lib/styles";
+import { formControlClass,textareaClass,textareaClass2 } from "@/lib/styles";
 import {
   budgetOptions,
   preferredContactOptions,
   projectTypeOptions,
   timelineOptions,
 } from "@/data/intake";
+import { FormSectionLabel } from "@/components/site/FormSectionLabel";
+import { FormAlert } from "@/components/site/FormAlert";
+import { SubmitButton } from "@/components/site/SubmitButton";
+import Link from "next/link";
 
 const initialState = {
   success: false,
@@ -86,10 +90,14 @@ export function ContactSection() {
           <h3 className="text-xl font-bold">Project inquiry</h3>
 
           <p className="mt-2 text-sm leading-6 text-slate-600">
-            This form currently logs inquiries to the server console. Next, we
-            can connect it to email or a database.
+            Use this form to explain what you are trying to build, fix, research, or
+            understand. The more context you provide, the easier it is to identify the
+            right next step.
           </p>
 
+            <p className="mt-3 text-xs text-slate-500">
+              Fields marked with <span className="font-semibold text-red-500">*</span> are required.
+            </p>
           <div className="mt-5 space-y-3">
             <input
               type="text"
@@ -99,24 +107,18 @@ export function ContactSection() {
               className="hidden"
               aria-hidden="true"
             />
+
+            <div className="mb-2">
+             <FormSectionLabel>Contact Information</FormSectionLabel>
+            </div>
             <input type="hidden" name="source" value="recon-dev-website" />
-            <FormField label="Name" hint="Please enter your full name">
+
+            <FormField label="Name" required hint="Please enter your full name">
             <input
               name="name"
               className={formControlClass}
               placeholder="Name"
-              type="text"
-              required
-            />
-            </FormField>
-
-            <FormField label="Email" hint="We'll use this to contact you about your inquiry">
-            <input
-              name="email"
-              className={formControlClass}
-              placeholder="Email"
-              type="email"
-              required
+              type="text"              
             />
             </FormField>
 
@@ -129,27 +131,68 @@ export function ContactSection() {
             />
             </FormField>
 
+            <FormField label="Email" required hint="We'll use this to contact you about your inquiry">
+            <input
+              name="email"
+              className={formControlClass}
+              placeholder="Email"
+              type="email"
+            />
+            </FormField>
+
+            <FormField label="phone Number">
+            <input
+              name="phoneNumber"
+              className={formControlClass}
+              placeholder="enter your phone number"
+              type="tel"
+              maxLength={14}
+              minLength={10}
+              pattern="\+?[0-9\s\-\.\(\)]{7,20}" 
+            />
+            </FormField>
+
+            <select
+              name="preferredContact"
+              className={formControlClass}
+              defaultValue=""
+              required
+            >
+              <option value="" disabled>
+                Preferred contact method
+              </option>
+              {preferredContactOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>            
+
+            <div className="mt-6 mb-2">
+              <FormSectionLabel className="mt-6">Project Details</FormSectionLabel>
+            </div>
+
             <select
               name="projectType"
-              className={formControlClass}
+              className={formControlClass}              
               required
               value={projectType}
               onChange={(event) => setProjectType(event.target.value)}
-            >
-              <option value="" disabled>
-                Project type
-              </option>
-               {projectTypeOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
+          >
+            <option value="" disabled>
+              Project type
+            </option>
+              {projectTypeOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
             ))}
             </select>
             {projectType === "Other" ? (
             <FormField label="Project Type" hint="What type of project are you working on?">
               <input
               name="projectTypeOther"
-              className={`${formControlClass} min-h-24`}
+              className={textareaClass}
               placeholder="Briefly describe the project type"
               type="text"
               required
@@ -160,7 +203,7 @@ export function ContactSection() {
             <FormField label="Project Goal" hint="What are you trying to build, fix, or understand?">
             <textarea
               name="goal"
-              className={`${formControlClass} min-h-24`}
+              className={textareaClass}
               placeholder="What are you trying to build, fix, or understand?"
               required
             />
@@ -170,12 +213,14 @@ export function ContactSection() {
 
             <textarea
               name="blocker"
-              className={`${formControlClass} min-h-24`}
+              className={textareaClass}
               placeholder="What is currently blocking progress?"
             />
             </FormField>
 
-
+            <div className="mt-6 mb-2">
+              <FormSectionLabel className="mt-6">Additional Context</FormSectionLabel>
+            </div>
             <div className="grid gap-3 sm:grid-cols-2">
             <FormField label="Budget" hint="What is your budget range for this project?">
               <select
@@ -213,20 +258,7 @@ export function ContactSection() {
               </FormField>
             </div>
 
-            <select
-              name="preferredContact"
-              className={formControlClass}
-              defaultValue=""
-            >
-              <option value="" disabled>
-                Preferred contact method
-              </option>
-              {preferredContactOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+
 
             <textarea
               name="message"
@@ -235,30 +267,32 @@ export function ContactSection() {
             />
 
             {state.message ? (
-              <div
-                className={`rounded-2xl px-4 py-3 text-sm ${
-                  state.success
-                    ? "bg-emerald-50 text-emerald-700"
-                    : "bg-red-50 text-red-700"
-                }`}
+              <FormAlert
+              success={state.success}
+              message={state.message}
+              referenceId={state.inquiryId}
+              />):null}  
+
+              <p className="text-xs leading-5 text-slate-500">
+                By submitting this form, you agree that Recon Dev LLC may use the information
+                provided to review your inquiry and respond. See the{" "}
+              <Link
+                href="/privacy"
+                prefetch={false}
+                className="font-semibold text-slate-950 underline"
               >
-                <p>{state.message}</p>
+                Privacy Policy
+              </Link>
+                for more information.
+              </p>          
 
-                {state.success && state.inquiryId ? (
-                  <p className="mt-1 font-mono text-xs">
-                    Save this reference: {state.inquiryId}
-                  </p>
-                ) : null}
-              </div>
-            ) : null}
+              <SubmitButton isPending={isPending} pendingText="Sending inquiry...">
+                Submit project inquiry
+              </SubmitButton>
 
-            <button
-              type="submit"
-              disabled={isPending}
-              className={formControlClass}
-            >
-              {isPending ? "Sending..." : "Send inquiry"}
-            </button>
+              <p className="text-center text-xs text-slate-500">
+                No automated sales spam. Responses come directly from Recon Dev.
+              </p>
           </div>
         </form>
       </div>
