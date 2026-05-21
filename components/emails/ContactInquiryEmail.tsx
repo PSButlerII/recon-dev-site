@@ -34,6 +34,7 @@ export function ContactInquiryEmail({
   source,
   name,
   email,
+  phone,
   company,
   projectType,
   goal,
@@ -49,6 +50,7 @@ export function ContactInquiryEmail({
   inquiryId,
   source,
   name,
+  phone,
   email,
   company,
   projectType,
@@ -81,6 +83,7 @@ export function ContactInquiryEmail({
           <Section>
             <Field label="Name" value={name} />
             <Field label="Email" value={email} />
+            <Field label="Phone" value={phone} />
             <Field label="Inquiry ID" value={inquiryId} />
             <Field label="Company / Organization" value={company} />
             <Field label="Project Type" value={projectType} />
