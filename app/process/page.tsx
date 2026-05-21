@@ -64,6 +64,29 @@ export default function ProcessPage() {
           </div>
         </Container>
       </Section>
+
+      <Section background="white" className="border-y border-slate-200">
+        <Container>
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
+              Practical process
+            </p>
+
+            <h2 className="text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
+              The process changes based on the problem, but the mindset stays the
+              same.
+            </h2>
+
+            <p className="mt-5 leading-8 text-slate-600">
+              Some projects need troubleshooting. Some need research. Some need a
+              prototype plan, a website, a workflow, or a complete application.
+              Recon Dev starts by understanding the objective before choosing the
+              method.
+            </p>
+          </div>
+        </Container>
+      </Section>
+
       <CallToAction
         eyebrow="Have a project like this?"
         title="Turn the rough idea into a practical next step."

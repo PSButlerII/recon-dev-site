@@ -2,26 +2,26 @@ export const faqs = [
   {
     question: "What kind of clients does Recon Dev work with?",
     answer:
-      "Recon Dev works with small businesses, startups, inventors, independent operators, and hands-on builders who need practical technical help, planning, research, or development support.",
+      "Recon Dev primarily works with small businesses, startups, inventors, independent operators, and hands-on builders who need practical technical help without unnecessary complexity.",
   },
   {
     question: "Do I need to know exactly what service I need?",
     answer:
-      "No. Many clients only know the goal or the problem. Recon Dev can help clarify whether the right next step is IT support, software development, systems review, documentation, or prototype planning.",
+      "No. Many inquiries begin with a goal, blocker, or unfinished idea rather than a fully defined project. Part of the process is helping clarify the right next step.",
   },
   {
-    question: "Can Recon Dev build a full application or website?",
+    question: "Can Recon Dev help with both software and physical projects?",
     answer:
-      "Yes. Recon Dev can help plan, build, test, and document websites, web applications, internal dashboards, intake systems, workflow tools, and database-backed applications.",
+      "Yes. The focus is on practical technical problem solving, which may involve websites, applications, workflows, research, electronics planning, fabrication support, or prototype-related work.",
   },
   {
-    question: "Can you help with physical prototypes?",
+    question: "How are projects usually handled?",
     answer:
-      "Yes, especially during early planning. Recon Dev can help with research, diagrams, parts lists, 3D printing support, electronics planning, and practical prototype documentation.",
+      "Most projects begin with research, clarification, and scope review before implementation. Smaller support requests may be handled quickly, while larger builds move through planning and iteration phases.",
   },
   {
-    question: "How does pricing work?",
+    question: "Do you only work remotely?",
     answer:
-      "Simple support may be handled hourly. Larger projects are usually scoped after the problem, goals, timeline, and requirements are reviewed.",
+      "Most work is remote-friendly, especially research, development, troubleshooting, documentation, and planning. Local support may be available depending on the project and location.",
   },
 ];

@@ -9,6 +9,8 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { FaqSection } from "@/components/site/FaqSection";
 import { CapabilitiesSection } from "@/components/home/CapabilitiesSection";
 import { ProcessTimelineSection } from "@/components/home/ProcessTimelineSection";
+import { TrustStrip } from "@/components/home/TrustStrip";
+import { WhyReconSection } from "@/components/home/WhyReconSection";
 
 export default function HomePage() {
   return (
@@ -17,11 +19,13 @@ export default function HomePage() {
 
       <main id="top">
         <HeroSection />
+        <TrustStrip />
         <ServicesSection />
         <ProcessSection />
         <ProjectFitSection />
         <PackagesSection />
-        <CapabilitiesSection/>
+        <CapabilitiesSection />
+        <WhyReconSection />
         <ProcessTimelineSection />
         <FaqSection/>
         <ContactSection />

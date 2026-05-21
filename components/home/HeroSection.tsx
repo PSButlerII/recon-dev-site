@@ -58,8 +58,8 @@ export function HeroSection() {
           transition={{ duration: 0.5 }}
         >
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-700">
-            <Lightbulb className="h-4 w-4" />
-            Practical technical help for builders, startups, and small teams.
+            <Lightbulb  className="max-w-4xl text-4xl font-black tracking-tight text-slate-950 md:text-6xl"/>
+              Practical technical help for builders, small businesses, and ideas that do not fit a template.
           </div>
 
           <h1 className="max-w-4xl text-4xl font-black tracking-tight text-slate-950 md:text-6xl">
@@ -68,9 +68,8 @@ export function HeroSection() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-            Recon Dev LLC helps small businesses, inventors, and hands-on
-            operators turn messy problems into clear plans, working systems,
-            useful documentation, and practical prototypes.
+              Recon Dev LLC helps turn unclear technical problems into working plans,
+              websites, systems, documentation, and prototype-ready next steps.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -84,7 +83,7 @@ export function HeroSection() {
           </div>
 
           <div className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-3">
-            {["IT Support", "Software Builds", "Prototype Planning"].map(
+            {["IT Support", "Software Builds", "Research" , "Development" , "Technical Support" , "Prototype Planning"].map(
               (item) => (
                 <div
                   key={item}

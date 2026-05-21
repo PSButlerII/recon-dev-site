@@ -2,21 +2,21 @@ export const capabilities = [
   {
     title: "Research & Planning",
     description:
-      "Problem analysis, solution mapping, technical research, documentation, and project direction.",
+      "Clarify goals, compare options, document findings, and create a practical plan before money is wasted on the wrong solution.",
   },
   {
     title: "Software & Web Development",
     description:
-      "Websites, dashboards, intake systems, workflow tools, databases, and custom applications.",
+      "Build websites, dashboards, intake forms, workflow tools, and database-backed applications that support real business operations.",
   },
   {
     title: "Systems & Technical Support",
     description:
-      "Troubleshooting, environment review, deployment support, infrastructure guidance, and workflow improvement.",
+      "Troubleshoot technology problems, review workflows, improve tool usage, and help small teams make their systems easier to manage.",
   },
   {
     title: "Prototype & Fabrication Support",
     description:
-      "3D printing guidance, electronics planning, prototype documentation, and practical build support.",
+      "Support early-stage physical ideas with 3D printing guidance, parts research, diagrams, electronics planning, and build documentation.",
   },
 ];

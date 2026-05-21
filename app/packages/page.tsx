@@ -64,6 +64,26 @@ export default function PackagesPage() {
         </Container>
       </Section>
 
+      <Section background="white" className="border-y border-slate-200">
+        <Container>
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
+              How pricing works
+            </p>
+
+            <h2 className="text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
+              Some work is hourly. Some work needs a scoped plan.
+            </h2>
+
+            <p className="mt-5 leading-8 text-slate-600">
+              Simple support, troubleshooting, and small updates may fit an hourly
+              model. Larger builds, research-heavy work, system reviews, or prototype
+              planning usually need a clearer scope before quoting.
+            </p>
+          </div>
+        </Container>
+      </Section>
+
       <CallToAction
           eyebrow="Not sure where you fit?"
           title="Start with the problem, not the package."

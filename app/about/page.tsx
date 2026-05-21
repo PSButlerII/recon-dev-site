@@ -2,6 +2,8 @@ import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { PageShell } from "@/components/site/PageShell";
 import { Section } from "@/components/site/Section";
+import { Container } from "@/components/site/Container";
+
 export const metadata = {
   title: "About",
   description:
@@ -55,6 +57,28 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <Section background="white" className="border-y border-slate-200">
+        <Container>
+          <div className="mx-auto max-w-4xl">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
+              Operating philosophy
+            </p>
+
+            <h2 className="text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
+              The work starts by finding the real problem.
+            </h2>
+
+            <p className="mt-5 text-lg leading-8 text-slate-600">
+              Recon Dev is built around research, testing, documentation, and
+              practical execution. The goal is not to make a project sound more
+              complicated than it is. The goal is to understand what matters, find the
+              root blocker, and create a path that can actually be used.
+            </p>
+          </div>
+        </Container>
+      </Section>
+
 
       <Section background="white" className="border-y border-slate-200">
         <div className="mx-auto max-w-5xl">

@@ -119,3 +119,27 @@ export const projectTypes = [
   "Security checklists",
   "Technical guides",
 ];
+
+export const projectFitItems = [
+  {
+    title: "Small businesses needing technical direction",
+    description:
+      "Support for operators who need systems, websites, troubleshooting, process improvements, or help organizing technical work.",
+  },
+  {
+    title: "Startups and early-stage ideas",
+    description:
+      "Research, planning, documentation, prototyping guidance, and practical next steps before scaling complexity.",
+  },
+  {
+    title: "Inventors and hands-on builders",
+    description:
+      "Technical assistance for projects involving software, electronics, fabrication planning, automation, or custom workflows.",
+  },
+  {
+    title: "Teams dealing with unclear technical problems",
+    description:
+      "Useful when the issue is difficult to define, spans multiple systems, or needs investigation before implementation.",
+  },
+];
+

@@ -8,21 +8,22 @@ import { PageShell } from "@/components/site/PageShell";
 import { Section } from "@/components/site/Section";
 
 export const metadata = {
-  title: "Projects",
+  title: "Project Areas",
   description:
-    "Explore examples of Recon Dev LLC project work, including web applications, IT support, systems review, documentation, security review, and prototype planning.",
+    "Explore Recon Dev LLC project areas including web applications, IT support, systems review, research documentation, security review, and prototype planning.",
 };
 
 export default function ProjectsPage() {
   return (
     <PageShell>
       <SiteHeader />
-      <PageHero
-        eyebrow="Projects"
-        title="A practical look at the kinds of problems Recon Dev solves"
+     <PageHero
+        eyebrow="Project Areas"
+        title="Examples of the kinds of problems Recon Dev can support"
       >
-        This page can grow into full case studies. For now, it gives visitors a
-        clear view of the project categories Recon Dev can support.
+        This page highlights project areas and capability examples. Full case studies
+        can be added as completed client work, internal builds, and deployed projects
+        become available.
       </PageHero>
 
       <Section>
@@ -40,6 +41,28 @@ export default function ProjectsPage() {
           </div>
         </Container>
       </Section>
+
+      <Section background="white" className="border-y border-slate-200">
+        <Container>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
+              Case studies
+            </p>
+
+            <h2 className="text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
+              Real project writeups will be added carefully.
+            </h2>
+
+            <p className="mt-5 leading-8 text-slate-600">
+              Recon Dev will only publish case studies when the work can be described
+              accurately, respectfully, and without exposing client-sensitive details.
+              Internal builds, deployed tools, and completed client projects may be
+              added here as the portfolio grows.
+            </p>
+          </div>
+        </Container>
+      </Section>
+
       <CallToAction
         eyebrow="Have a project like this?"
         title="Turn the rough idea into a practical next step."
