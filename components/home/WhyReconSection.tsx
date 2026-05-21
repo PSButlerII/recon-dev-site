@@ -1,6 +1,7 @@
 import { Container } from "@/components/site/Container";
 import { Section } from "@/components/site/Section";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { whyReconPoints } from "@/data/why-recon";
 
 const points = [
   {
@@ -30,7 +31,7 @@ export function WhyReconSection() {
         </SectionHeading>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {points.map((point) => (
+          {whyReconPoints.map((point) => (
             <article
               key={point.title}
               className="rounded-3xl border border-slate-200 bg-slate-50 p-7"
