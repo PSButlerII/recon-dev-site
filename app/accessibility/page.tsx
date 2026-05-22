@@ -2,12 +2,13 @@ import { PageHero } from "@/components/site/PageHero";
 import { PageShell } from "@/components/site/PageShell";
 import { siteConfig } from "@/data/site";
 import { ContentSection } from "@/components/site/ContentSection";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Accessibility",
   description:
     "Accessibility statement for Recon Dev LLC and its commitment to making the website usable and clear.",
-};
+});
 
 export default function AccessibilityPage() {
   return (

@@ -3,12 +3,14 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { PageShell } from "@/components/site/PageShell";
 import { Section } from "@/components/site/Section";
 import { ContentSection } from "@/components/site/ContentSection";
+import { CenteredContentBlock } from "@/components/site/CenteredContentBlock";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "About",
   description:
     "Learn about Recon Dev LLC, a practical research, development, IT support, software, and prototyping company helping small businesses, inventors, and hands-on operators.",
-};
+});
 
 export default function AboutPage() {
   return (
@@ -59,22 +61,11 @@ export default function AboutPage() {
       </section>
 
       <ContentSection background="white" className="border-y border-slate-200">
-          <div className="mx-auto max-w-4xl">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-              Operating philosophy
-            </p>
-
-            <h2 className="text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
-              The work starts by finding the real problem.
-            </h2>
-
-            <p className="mt-5 text-lg leading-8 text-slate-600">
-              Recon Dev is built around research, testing, documentation, and
-              practical execution. The goal is not to make a project sound more
-              complicated than it is. The goal is to understand what matters, find the
-              root blocker, and create a path that can actually be used.
-            </p>
-          </div>
+          <CenteredContentBlock
+              eyebrow = "Operating philosophy"          
+              title = "The work starts by finding the real problem."          
+              text = "Recon Dev is built around research, testing, documentation, and practical execution. The goal is not to make a project sound more complicated than it is. The goal is to understand what matters, find the root blocker, and create a path that can actually be used."
+            />
         </ContentSection>
 
 

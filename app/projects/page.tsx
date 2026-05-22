@@ -5,12 +5,13 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { CallToAction } from "@/components/site/CallToAction";
 import { PageShell } from "@/components/site/PageShell";
 import { ContentSection } from "@/components/site/ContentSection";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Project Areas",
   description:
     "Explore Recon Dev LLC project areas including web applications, IT support, systems review, research documentation, security review, and prototype planning.",
-};
+});
 
 export default function ProjectsPage() {
   return (

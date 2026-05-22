@@ -5,12 +5,15 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { CallToAction } from "@/components/site/CallToAction";
 import { PageShell } from "@/components/site/PageShell";
 import { ContentSection } from "@/components/site/ContentSection";
+import { CenteredContentBlock } from "@/components/site/CenteredContentBlock";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Services",
   description:
-    "Explore Recon Dev LLC services including IT support, web development, systems review, security review, research documentation, and prototype planning.",
-};
+    "Explore Recon Dev LLC services including IT support, web development, systems review, research documentation, and prototype planning.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (
@@ -40,22 +43,11 @@ export default function ServicesPage() {
         </ContentSection>
 
       <ContentSection background="white" className="border-y border-slate-200">
-          <div className="mx-auto max-w-4xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-              Flexible support
-            </p>
-
-            <h2 className="text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
-              Services can be combined when the problem does not fit one box.
-            </h2>
-
-            <p className="mt-5 leading-8 text-slate-600">
-              A project may start as a website, become a workflow review, require
-              documentation, and eventually need custom software or prototype
-              planning. Recon Dev is designed to support that kind of practical
-              overlap.
-            </p>
-          </div>
+        <CenteredContentBlock
+          eyebrow="Flexible support"
+          title="Services can be combined when the problem does not fit one box."
+          text="A project may start as a website, become a workflow review, require documentation, and eventually need custom software or prototype planning. Recon Dev is designed to support that kind of practical overlap."
+        />
         </ContentSection>
       <CallToAction
         eyebrow="Need help choosing?"

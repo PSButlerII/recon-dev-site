@@ -6,12 +6,13 @@ import { PageShell } from "@/components/site/PageShell";
 import { InfoCard } from "@/components/site/InfoCard";
 import { contactIntroCards } from "@/data/contact";
 import { ContentSection } from "@/components/site/ContentSection";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Contact",
   description:
     "Contact Recon Dev LLC for IT support, software development, systems review, documentation, research, or prototype planning.",
-};
+});
 
 export default function ContactPage() {
   return (

@@ -5,12 +5,14 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { CallToAction } from "@/components/site/CallToAction";
 import { PageShell } from "@/components/site/PageShell";
 import { ContentSection } from "@/components/site/ContentSection";
+import { CenteredContentBlock } from "@/components/site/CenteredContentBlock";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Packages",
   description:
     "Review Recon Dev LLC service packages for starter support, project buildouts, systems review, IT support, software development, and technical planning.",
-};
+});
 
 export default function PackagesPage() {
   return (
@@ -62,21 +64,11 @@ export default function PackagesPage() {
         </ContentSection>
 
       <ContentSection background="white" className="border-y border-slate-200">
-          <div className="mx-auto max-w-4xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-              How pricing works
-            </p>
-
-            <h2 className="text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
-              Some work is hourly. Some work needs a scoped plan.
-            </h2>
-
-            <p className="mt-5 leading-8 text-slate-600">
-              Simple support, troubleshooting, and small updates may fit an hourly
-              model. Larger builds, research-heavy work, system reviews, or prototype
-              planning usually need a clearer scope before quoting.
-            </p>
-          </div>
+          <CenteredContentBlock
+              eyebrow= "How pricing works"           
+              title = "Some work is hourly. Some work needs a scoped plan."      
+              text = "Simple support, troubleshooting, and small updates may fit an hourly model. Larger builds, research-heavy work, system reviews, or prototype planning usually need a clearer scope before quoting."
+            />
         </ContentSection>
 
       <CallToAction

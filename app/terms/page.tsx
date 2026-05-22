@@ -1,15 +1,14 @@
 import { PageHero } from "@/components/site/PageHero";
 import { PageShell } from "@/components/site/PageShell";
-import { Container } from "@/components/site/Container";
-import { Section } from "@/components/site/Section";
 import { siteConfig } from "@/data/site";
 import { ContentSection } from "@/components/site/ContentSection";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Terms of Service",
   description:
     "Terms of service for Recon Dev LLC website, project inquiries, consulting, support, and technical services.",
-};
+});
 
 export default function TermsPage() {
   return (
