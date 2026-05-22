@@ -2,7 +2,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { PageShell } from "@/components/site/PageShell";
 import { Section } from "@/components/site/Section";
-import { Container } from "@/components/site/Container";
+import { ContentSection } from "@/components/site/ContentSection";
 
 export const metadata = {
   title: "About",
@@ -58,8 +58,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <Section background="white" className="border-y border-slate-200">
-        <Container>
+      <ContentSection background="white" className="border-y border-slate-200">
           <div className="mx-auto max-w-4xl">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
               Operating philosophy
@@ -76,8 +75,7 @@ export default function AboutPage() {
               root blocker, and create a path that can actually be used.
             </p>
           </div>
-        </Container>
-      </Section>
+        </ContentSection>
 
 
       <Section background="white" className="border-y border-slate-200">

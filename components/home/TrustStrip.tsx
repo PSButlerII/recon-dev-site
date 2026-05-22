@@ -1,5 +1,5 @@
-import { Container } from "@/components/site/Container";
 import { trustStripItems } from "@/data/trust-strip";
+import { ContentSection } from "@/components/site/ContentSection";
 
 const items = [
   {
@@ -22,8 +22,7 @@ const items = [
 
 export function TrustStrip() {
   return (
-    <section className="border-y border-slate-200 bg-white">
-      <Container>
+    <ContentSection background="white" className="border-y border-slate-200">
         <div className="grid gap-4 py-6 md:grid-cols-4">
           {trustStripItems.map((item) => (
             <div key={item.label} className="text-center">
@@ -32,7 +31,6 @@ export function TrustStrip() {
             </div>
           ))}
         </div>
-      </Container>
-    </section>
+     </ContentSection>
   );
 }

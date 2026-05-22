@@ -1,4 +1,6 @@
-export const processSteps = [
+import type { ProcessStep } from "@/types/content";
+
+export const processSteps: ProcessStep[] = [
   {
     step: "01",
     title: "Initial Inquiry",

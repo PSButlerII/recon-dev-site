@@ -1,4 +1,6 @@
-export const faqs = [
+import type { FaqItem } from "@/types/content";
+
+export const faqs: FaqItem[] = [
   {
     question: "What kind of clients does Recon Dev work with?",
     answer:

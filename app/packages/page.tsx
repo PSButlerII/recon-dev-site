@@ -1,11 +1,10 @@
 import { packages } from "@/data/home";
 import { CheckCircle2 } from "lucide-react";
-import { Container } from "@/components/site/Container";
 import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { CallToAction } from "@/components/site/CallToAction";
 import { PageShell } from "@/components/site/PageShell";
-import { Section } from "@/components/site/Section";
+import { ContentSection } from "@/components/site/ContentSection";
 
 export const metadata = {
   title: "Packages",
@@ -26,8 +25,7 @@ export default function PackagesPage() {
         documentation.
       </PageHero>
 
-      <Section>
-        <Container>
+      <ContentSection>
           <div className="grid gap-6 lg:grid-cols-3">
             {packages.map((item) => (
               <article
@@ -61,11 +59,9 @@ export default function PackagesPage() {
               </article>
             ))}
           </div>
-        </Container>
-      </Section>
+        </ContentSection>
 
-      <Section background="white" className="border-y border-slate-200">
-        <Container>
+      <ContentSection background="white" className="border-y border-slate-200">
           <div className="mx-auto max-w-4xl text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
               How pricing works
@@ -81,8 +77,7 @@ export default function PackagesPage() {
               planning usually need a clearer scope before quoting.
             </p>
           </div>
-        </Container>
-      </Section>
+        </ContentSection>
 
       <CallToAction
           eyebrow="Not sure where you fit?"

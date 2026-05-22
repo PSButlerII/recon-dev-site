@@ -2,11 +2,11 @@ import { faqs } from "@/data/faq";
 import { Container } from "@/components/site/Container";
 import { Section } from "@/components/site/Section";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { ContentSection } from "@/components/site/ContentSection";
 
 export function FaqSection() {
   return (
-    <Section background="white" className="border-y border-slate-200">
-      <Container>
+    <ContentSection background="white" className="border-y border-slate-200">
         <SectionHeading
           eyebrow="FAQ"
           title="Questions before starting?"
@@ -29,7 +29,6 @@ export function FaqSection() {
             </article>
           ))}
         </div>
-      </Container>
-    </Section>
+      </ContentSection>
   );
 }

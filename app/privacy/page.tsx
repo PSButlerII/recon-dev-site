@@ -1,8 +1,7 @@
 import { PageHero } from "@/components/site/PageHero";
 import { PageShell } from "@/components/site/PageShell";
-import { Container } from "@/components/site/Container";
-import { Section } from "@/components/site/Section";
 import { siteConfig } from "@/data/site";
+import { ContentSection } from "@/components/site/ContentSection";
 
 export const metadata = {
   title: "Privacy Policy",
@@ -21,8 +20,7 @@ export default function PrivacyPage() {
         through this website.
       </PageHero>
 
-      <Section>
-        <Container>
+       <ContentSection>
           <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
             <div className="space-y-8 leading-7 text-slate-600">
               <section>
@@ -89,8 +87,7 @@ export default function PrivacyPage() {
               </section>
             </div>
           </div>
-        </Container>
-      </Section>
+        </ContentSection>
     </PageShell>
   );
 }

@@ -1,12 +1,10 @@
 import { processSteps } from "@/data/process-steps";
-import { Container } from "@/components/site/Container";
-import { Section } from "@/components/site/Section";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { ContentSection } from "@/components/site/ContentSection";
 
 export function ProcessTimelineSection() {
   return (
-    <Section background="white" className="border-y border-slate-200">
-      <Container>
+    <ContentSection background="white" className="border-y border-slate-200">
         <SectionHeading
           eyebrow="Workflow"
           title="How projects move forward"
@@ -35,7 +33,6 @@ export function ProcessTimelineSection() {
             </article>
           ))}
         </div>
-      </Container>
-    </Section>
+    </ContentSection>
   );
 }

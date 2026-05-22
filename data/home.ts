@@ -6,6 +6,7 @@ import {
   MonitorCog,
   ShieldCheck,
 } from "lucide-react";
+import type { ProjectFitItem } from "@/types/content";
 
 export const services = [
   {
@@ -120,7 +121,7 @@ export const projectTypes = [
   "Technical guides",
 ];
 
-export const projectFitItems = [
+export const projectFitItems : ProjectFitItem[] =  [
   {
     title: "Small businesses needing technical direction",
     description:

@@ -1,7 +1,6 @@
-import { Container } from "@/components/site/Container";
-import { Section } from "@/components/site/Section";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { whyReconPoints } from "@/data/why-recon";
+import { ContentSection } from "@/components/site/ContentSection";
 
 const points = [
   {
@@ -20,8 +19,7 @@ const points = [
 
 export function WhyReconSection() {
   return (
-    <Section background="white" className="border-y border-slate-200">
-      <Container>
+    <ContentSection background="white" className="border-y border-slate-200">
         <SectionHeading
           eyebrow="Why Recon Dev"
           title="A practical partner for the undefined middle"
@@ -44,7 +42,6 @@ export function WhyReconSection() {
             </article>
           ))}
         </div>
-      </Container>
-    </Section>
+    </ContentSection>
   );
 }

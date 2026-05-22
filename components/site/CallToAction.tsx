@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container } from "@/components/site/Container";
 import { ButtonLink } from "@/components/site/ButtonLink";
 import { Section } from "./Section";
+import { ContentSection } from "@/components/site/ContentSection";
 
 type CallToActionProps = {
   eyebrow?: string;
@@ -19,8 +20,7 @@ export function CallToAction({
   buttonHref = "/contact",
 }: CallToActionProps) {
   return (
-    <Section background="white" className="border-y border-slate-200">
-      <Container>
+    <ContentSection background="white" className="border-y border-slate-200">
         <div className="grid gap-8 rounded-3xl bg-slate-950 p-8 text-white md:grid-cols-[1fr_0.7fr] md:items-center md:p-12">
           <div>
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-400">
@@ -36,7 +36,6 @@ export function CallToAction({
             {buttonText}
           </ButtonLink>
         </div>
-      </Container>
-    </Section>
+      </ContentSection>
   );
 }

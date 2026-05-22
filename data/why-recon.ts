@@ -1,4 +1,6 @@
-export const whyReconPoints = [
+import type { InfoCardContent } from "@/types/content";
+
+export const whyReconPoints: InfoCardContent[] = [
   {
     title: "For problems that do not fit one category",
     text: "Some requests are part website, part workflow, part troubleshooting, and part research. Recon Dev is built for that overlap.",

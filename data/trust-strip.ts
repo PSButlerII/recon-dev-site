@@ -1,4 +1,6 @@
-export const trustStripItems = [
+import type { LabeledPoint } from "@/types/content";
+
+export const trustStripItems: LabeledPoint[] = [
   {
     label: "Research-first",
     text: "Understand before building",

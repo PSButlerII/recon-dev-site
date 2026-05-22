@@ -1,11 +1,9 @@
 import { projectFitItems } from "@/data/home";
-import { Container } from "@/components/site/Container";
-import { Section } from "@/components/site/Section";
+import { ContentSection } from "@/components/site/ContentSection";
 
 export function ProjectFitSection() {
   return (
-    <Section>
-      <Container>
+    <ContentSection background="white" className="border-y border-slate-200">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div>
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
@@ -41,7 +39,6 @@ export function ProjectFitSection() {
             ))}
           </div>
         </div>
-      </Container>
-    </Section>
+    </ContentSection>
   );
 }

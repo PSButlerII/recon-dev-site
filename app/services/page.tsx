@@ -1,11 +1,11 @@
 import { services } from "@/data/home";
 import { CardGridItem } from "@/components/site/CardGridItem";
-import { Container } from "@/components/site/Container";
 import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { CallToAction } from "@/components/site/CallToAction";
 import { PageShell } from "@/components/site/PageShell";
-import { Section } from "@/components/site/Section";
+import { ContentSection } from "@/components/site/ContentSection";
+
 export const metadata = {
   title: "Services",
   description:
@@ -25,8 +25,7 @@ export default function ServicesPage() {
           prototype planning.
         </PageHero>
 
-      <Section>
-        <Container>
+      <ContentSection>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
               <CardGridItem
@@ -38,11 +37,9 @@ export default function ServicesPage() {
               />
             ))}
           </div>
-        </Container>
-      </Section>
+        </ContentSection>
 
-      <Section background="white" className="border-y border-slate-200">
-        <Container>
+      <ContentSection background="white" className="border-y border-slate-200">
           <div className="mx-auto max-w-4xl text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
               Flexible support
@@ -59,9 +56,7 @@ export default function ServicesPage() {
               overlap.
             </p>
           </div>
-        </Container>
-      </Section>
-
+        </ContentSection>
       <CallToAction
         eyebrow="Need help choosing?"
         title="You do not need to know the exact service before reaching out."

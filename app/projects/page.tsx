@@ -1,11 +1,10 @@
 import { projects } from "@/data/projects";
 import { CardGridItem } from "@/components/site/CardGridItem";
-import { Container } from "@/components/site/Container";
 import { PageHero } from "@/components/site/PageHero";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { CallToAction } from "@/components/site/CallToAction";
 import { PageShell } from "@/components/site/PageShell";
-import { Section } from "@/components/site/Section";
+import { ContentSection } from "@/components/site/ContentSection";
 
 export const metadata = {
   title: "Project Areas",
@@ -26,8 +25,7 @@ export default function ProjectsPage() {
         become available.
       </PageHero>
 
-      <Section>
-        <Container>
+      <ContentSection>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
               <CardGridItem
@@ -39,11 +37,9 @@ export default function ProjectsPage() {
               />
             ))}
           </div>
-        </Container>
-      </Section>
+        </ContentSection>
 
-      <Section background="white" className="border-y border-slate-200">
-        <Container>
+      <ContentSection background="white" className="border-y border-slate-200">
           <div className="mx-auto max-w-3xl text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
               Case studies
@@ -60,8 +56,7 @@ export default function ProjectsPage() {
               added here as the portfolio grows.
             </p>
           </div>
-        </Container>
-      </Section>
+        </ContentSection>
 
       <CallToAction
         eyebrow="Have a project like this?"

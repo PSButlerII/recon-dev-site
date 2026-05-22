@@ -1,4 +1,7 @@
-export const capabilities = [
+import type { SectionPoint } from "@/types/content";
+
+
+export const capabilities: SectionPoint[] = [
   {
     title: "Research & Planning",
     description:
