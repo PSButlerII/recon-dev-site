@@ -1,24 +1,52 @@
 import type { Metadata } from "next";
-import { siteConfig } from "@/data/site";
-import "./globals.css";
 import { Inter } from "next/font/google";
+import "./globals.css";
+
+import { StructuredData } from "@/components/site/StructuredData";
+import { siteConfig } from "@/data/site";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+
   title: {
-    default: `${siteConfig.name} | ${siteConfig.tagline}`,
+    default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
   },
+
   description: siteConfig.description,
-  authors: [{ name: siteConfig.name }],
+
+  keywords: [
+    "IT support",
+    "web development",
+    "software development",
+    "research and development",
+    "prototype planning",
+    "small business technology",
+    "technical support",
+    "workflow automation",
+  ],
+
+  authors: [
+    {
+      name: siteConfig.name,
+    },
+  ],
+
   creator: siteConfig.name,
+  publisher: siteConfig.name,
+
   openGraph: {
-    title: `${siteConfig.name} | ${siteConfig.tagline}`,
-    description: siteConfig.description,
     type: "website",
     locale: "en_US",
-    siteName: siteConfig.name,
     url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
     images: [
       {
         url: siteConfig.ogImage,
@@ -28,9 +56,16 @@ export const metadata: Metadata = {
       },
     ],
   },
+
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+  },
+
   icons: {
     icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
   },
 };
 
@@ -42,13 +77,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased`}>
+        <StructuredData />
         {children}
       </body>
     </html>
   );
 }
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
