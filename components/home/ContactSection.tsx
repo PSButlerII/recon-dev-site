@@ -3,7 +3,7 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 import { submitContactForm } from "@/app/contact/actions";
 import { FormField } from "@/components/site/FormField";
-import { formControlClass,textareaClass,textareaClass2 } from "@/lib/styles";
+import { formControlClass, textareaClass } from "@/lib/styles";
 import {
   budgetOptions,
   preferredContactOptions,
@@ -25,12 +25,13 @@ export function ContactSection() {
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState
   );
   const formRef = useRef<HTMLFormElement>(null);
+
   useEffect(() => {
-  if (state.success) {
-    formRef.current?.reset();
-    setProjectType("");
-  }
-}, [state.success]);
+    if (state.success) {
+      formRef.current?.reset();
+    }
+  }, [state.success]);
+
   return (
     <section id="contact" className="mx-auto max-w-7xl px-5 py-20">
       <div className="grid gap-8 rounded-[2rem] bg-slate-950 p-8 text-white md:grid-cols-[1fr_0.8fr] md:p-12">
@@ -86,7 +87,12 @@ export function ContactSection() {
         </div>
         
 
-        <form ref={formRef} action={formAction} className="rounded-3xl bg-white p-6 text-slate-950">
+        <form
+          ref={formRef}
+          action={formAction}
+          onReset={() => setProjectType("")}
+          className="rounded-3xl bg-white p-6 text-slate-950"
+        >
           <h3 className="text-xl font-bold">Project inquiry</h3>
 
           <p className="mt-2 text-sm leading-6 text-slate-600">
@@ -142,7 +148,7 @@ export function ContactSection() {
 
             <FormField label="phone Number">
             <input
-              name="phoneNumber"
+              name="phone"
               className={formControlClass}
               placeholder="enter your phone number"
               type="tel"

@@ -1,6 +1,5 @@
 "use server";
 
-import type { ContactInquiry } from "@/types/intake";
 import { toCrmPayload } from "@/lib/intake";
 import { sendInquiryToCrm } from "@/lib/crm";
 import { canSubmit } from "@/lib/security";
