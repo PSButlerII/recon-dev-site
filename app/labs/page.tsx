@@ -1,8 +1,8 @@
+import { LabProjectCard } from "@/components/labs/LabProjectCard";
 import { CallToAction } from "@/components/site/CallToAction";
 import { ContentSection } from "@/components/site/ContentSection";
 import { PageHero } from "@/components/site/PageHero";
 import { PageShell } from "@/components/site/PageShell";
-import { Badge } from "@/components/site/Badge";
 import { labProjects } from "@/data/labs";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -28,26 +28,7 @@ export default function LabsPage() {
       <ContentSection>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {labProjects.map((project) => (
-            <article
-              key={project.title}
-              className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"
-            >
-              <Badge>{project.status}</Badge>
-
-              <h2 className="mt-5 text-2xl font-bold tracking-tight text-slate-950">
-                {project.title}
-              </h2>
-
-              <p className="mt-4 leading-7 text-slate-600">
-                {project.summary}
-              </p>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <Badge key={tag}>{tag}</Badge>
-                ))}
-              </div>
-            </article>
+            <LabProjectCard key={project.slug} project={project} />
           ))}
         </div>
       </ContentSection>
