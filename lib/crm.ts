@@ -23,15 +23,12 @@ export async function sendInquiryToCrm(inquiry: ContactInquiry) {
     "Content-Type": "application/json",
     Authorization: `Bearer ${crmApiKey}`,
     "X-Recon-Timestamp": timestamp,
-  };
-
-  if (crmSigningSecret) {
-    headers["X-Recon-Signature"] = createHmacSignature({
+    "X-Recon-Signature": createHmacSignature({
       body,
       timestamp,
       secret: crmSigningSecret,
-    });
-  }
+    }),
+  };
 
   const response = await fetch(crmUrl, {
     method: "POST",
@@ -40,10 +37,13 @@ export async function sendInquiryToCrm(inquiry: ContactInquiry) {
   });
 
   if (!response.ok) {
+    const responseBody = await response.text().catch(() => undefined);
+
     logError("CRM intake sync failed", {
       inquiryId: inquiry.inquiryId,
       status: response.status,
       statusText: response.statusText,
+      responseBody,
     });
   }
 }
