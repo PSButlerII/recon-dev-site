@@ -17,7 +17,7 @@ export function parseContactForm(formData: FormData): ParsedContactForm {
   const company = limitText(String(formData.get("company") || "").trim(), 180);
   const phone = limitText(
     String(formData.get("phone") || formData.get("phoneNumber") || "").trim(),
-    15
+    20
   );
 
   const projectType = limitText(
@@ -54,10 +54,7 @@ export function parseContactForm(formData: FormData): ParsedContactForm {
     120
   );
 
-  const website = limitText(
-    String(formData.get("website") || "").trim(),
-    50
-  );
+  const website = limitText(String(formData.get("website") || "").trim(), 50);
 
   return {
     website,
