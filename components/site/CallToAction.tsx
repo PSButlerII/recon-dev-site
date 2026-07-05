@@ -1,7 +1,4 @@
-import Link from "next/link";
-import { Container } from "@/components/site/Container";
 import { ButtonLink } from "@/components/site/ButtonLink";
-import { Section } from "./Section";
 import { ContentSection } from "@/components/site/ContentSection";
 
 type CallToActionProps = {
@@ -21,21 +18,21 @@ export function CallToAction({
 }: CallToActionProps) {
   return (
     <ContentSection background="white" className="border-y border-slate-200">
-        <div className="grid gap-8 rounded-3xl bg-slate-950 p-8 text-white md:grid-cols-[1fr_0.7fr] md:items-center md:p-12">
-          <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-400">
-              {eyebrow}
-            </p>
+      <div className="grid gap-8 rounded-3xl bg-slate-950 p-8 text-white md:grid-cols-[1fr_0.7fr] md:items-center md:p-12">
+        <div>
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-400">
+            {eyebrow}
+          </p>
 
-            <h2 className="text-3xl font-bold tracking-tight">{title}</h2>
+          <h2 className="text-3xl font-bold tracking-tight">{title}</h2>
 
-            <p className="mt-4 max-w-3xl leading-7 text-slate-300">{text}</p>
-          </div>
-
-          <ButtonLink href={buttonHref} variant="light">
-            {buttonText}
-          </ButtonLink>
+          <p className="mt-4 max-w-3xl leading-7 text-slate-300">{text}</p>
         </div>
-      </ContentSection>
+
+        <ButtonLink href={buttonHref} variant="light">
+          {buttonText}
+        </ButtonLink>
+      </div>
+    </ContentSection>
   );
 }

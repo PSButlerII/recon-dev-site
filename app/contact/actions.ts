@@ -1,22 +1,19 @@
 "use server";
 
-import type { ContactInquiry } from "@/types/intake";
-import { toCrmPayload } from "@/lib/intake";
 import { sendInquiryToCrm } from "@/lib/crm";
-import { canSubmit } from "@/lib/security";
-import { parseContactForm } from "@/lib/parse-contact-form";
-import { validateContactForm } from "@/lib/validate-contact-form";
-import { logError, logInfo } from "@/lib/logger";
-import { sendContactInquiryEmail } from "@/lib/email";
 import { buildContactInquiry } from "@/lib/build-contact-inquiry";
+import { sendContactInquiryEmail } from "@/lib/email";
+import { toCrmPayload } from "@/lib/intake";
+import { logError, logInfo } from "@/lib/logger";
+import { parseContactForm } from "@/lib/parse-contact-form";
+import { canSubmit } from "@/lib/security";
+import { validateContactForm } from "@/lib/validate-contact-form";
 
 export type ContactFormState = {
   success: boolean;
   message: string;
   inquiryId?: string;
 };
-
-
 
 export async function submitContactForm(
   _previousState: ContactFormState,
@@ -50,7 +47,7 @@ export async function submitContactForm(
     };
   }
 
-const inquiry = buildContactInquiry(parsedInquiry);
+  const inquiry = buildContactInquiry(parsedInquiry);
 
   logInfo("New Recon Dev inquiry", inquiry);
   logInfo("CRM Payload", toCrmPayload(inquiry));
@@ -58,11 +55,11 @@ const inquiry = buildContactInquiry(parsedInquiry);
   const emailResult = await sendContactInquiryEmail(inquiry);
 
   if (!emailResult.success) {
-  return {
-    success: false,
-    message: emailResult.message,
-  };
-}
+    return {
+      success: false,
+      message: emailResult.message,
+    };
+  }
 
   try {
     await sendInquiryToCrm(inquiry);
