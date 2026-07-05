@@ -1,5 +1,7 @@
 import { Badge } from "@/components/site/Badge";
 import type { LabProject } from "@/data/labs";
+import { LabStatusBadge } from "./LabStatusBadge";
+import Link from "next/link";
 
 type LabProjectCardProps = {
   project: LabProject;
@@ -7,9 +9,10 @@ type LabProjectCardProps = {
 
 export function LabProjectCard({ project }: LabProjectCardProps) {
   return (
+    <Link href={`/labs/${project.slug}`}>
     <article className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
       <div className="flex flex-wrap items-center gap-2">
-        <Badge>{project.status}</Badge>
+        <LabStatusBadge status={project.status} />
         <Badge>{project.category}</Badge>
       </div>
 
@@ -75,5 +78,6 @@ export function LabProjectCard({ project }: LabProjectCardProps) {
         ))}
       </div>
     </article>
+    </Link>
   );
 }
