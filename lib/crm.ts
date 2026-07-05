@@ -8,7 +8,7 @@ export async function sendInquiryToCrm(inquiry: ContactInquiry) {
   const crmApiKey = process.env.CRM_INTAKE_API_KEY;
   const crmSigningSecret = process.env.CRM_SIGNING_SECRET;
 
-  if (!crmUrl || !crmApiKey) {
+  if (!crmUrl || !crmApiKey || !crmSigningSecret) {
     logInfo("CRM intake not configured. Skipping CRM sync.", {
       inquiryId: inquiry.inquiryId,
     });
@@ -17,7 +17,7 @@ export async function sendInquiryToCrm(inquiry: ContactInquiry) {
   }
 
   const body = JSON.stringify(toCrmPayload(inquiry));
-  const timestamp = new Date().toISOString();
+  const timestamp = Math.floor(Date.now() / 1000).toString();
 
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
