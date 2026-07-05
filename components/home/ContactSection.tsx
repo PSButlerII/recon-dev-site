@@ -29,7 +29,6 @@ export function ContactSection() {
   useEffect(() => {
     if (state.success) {
       formRef.current?.reset();
-      queueMicrotask(() => setProjectType(""));
     }
   }, [state.success]);
 
@@ -88,7 +87,12 @@ export function ContactSection() {
         </div>
         
 
-        <form ref={formRef} action={formAction} className="rounded-3xl bg-white p-6 text-slate-950">
+        <form
+          ref={formRef}
+          action={formAction}
+          onReset={() => setProjectType("")}
+          className="rounded-3xl bg-white p-6 text-slate-950"
+        >
           <h3 className="text-xl font-bold">Project inquiry</h3>
 
           <p className="mt-2 text-sm leading-6 text-slate-600">
