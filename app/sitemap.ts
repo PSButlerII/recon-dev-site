@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/data/site";
+import { labProjects } from "@/data/labs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = [
+const staticRoutes = [
   "",
   "/services",
   "/projects",
@@ -15,6 +16,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   "/terms",
   "/accessibility",
 ];
+
+const labRoutes = labProjects.map((project) => `/labs/${project.slug}`);
+
+const routes = [...staticRoutes, ...labRoutes];
 
   return routes.map((route) => ({
     url: `${siteConfig.url}${route}`,
