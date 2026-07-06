@@ -5,8 +5,9 @@ import { PageHero } from "@/components/site/PageHero";
 import { PageShell } from "@/components/site/PageShell";
 import { labProjects } from "@/data/labs";
 import { createPageMetadata } from "@/lib/metadata";
-import { LabStats } from "@/components/labs/LabStats";
-import { LabStatusSummary } from "@/components/labs/LabStatusSummary";
+import { LabLegend } from "@/components/labs/LabLegend";
+import { LabOverviewPanel } from "@/components/labs/LabOverviewPanel";
+import { LabDisclosure } from "@/components/labs/LabDisclosure";
 
 export const metadata = createPageMetadata({
   title: "Labs",
@@ -28,13 +29,20 @@ export default function LabsPage() {
       </PageHero>
 
       <ContentSection>
-        <LabStats/>
-        <LabStatusSummary />
+        <LabOverviewPanel />
+
+        <div className="mt-6">
+          <LabDisclosure />
+        </div>
+        
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {labProjects.map((project) => (
             <LabProjectCard key={project.slug} project={project} />
           ))}
         </div>
+        <div className="mt-10">
+  <LabLegend />
+</div>
       </ContentSection>
 
       <ContentSection background="white" className="border-y border-slate-200">

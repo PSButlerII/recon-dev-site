@@ -1,22 +1,12 @@
-import type { LabProjectStatus } from "@/data/labs";
+import { labStatusDefinitions } from "@/data/lab-statuses";
 import { labProjects } from "@/data/labs";
 
-const statuses: LabProjectStatus[] = [
-  "Active Development",
-  "Prototype",
-  "Research",
-  "Internal Tool",
-  "Client Work / In Progress",
-  "Concept",
-  "Production",
-  "Archived",
-];
-
 export function LabStatusSummary() {
-  const visibleStatuses = statuses
-    .map((status) => ({
-      status,
-      count: labProjects.filter((project) => project.status === status).length,
+  const visibleStatuses = labStatusDefinitions
+    .map((item) => ({
+      status: item.status,
+      count: labProjects.filter((project) => project.status === item.status)
+        .length,
     }))
     .filter((item) => item.count > 0);
 

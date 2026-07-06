@@ -1,3 +1,5 @@
+import type { LabCategory } from "@/data/lab-categories";
+
 export type LabProjectStatus =
   | "Concept"
   | "Research"
@@ -12,7 +14,7 @@ export type LabProject = {
   title: string;
   slug: string;
   status: LabProjectStatus;
-  category: string;
+  category: LabCategory;
   started: string;
   lastUpdated: string;
   maturity: number;
@@ -23,8 +25,24 @@ export type LabProject = {
   currentFocus: string;
   futureDirection: string;
   tags: string[];
+  developmentLog: LabDevelopmentLogEntry[];
 };
 
+export type LabLogType =
+  | "Research"
+  | "Prototype"
+  | "Testing"
+  | "Decision"
+  | "Build"
+  | "Documentation"
+  | "Release";
+
+export type LabDevelopmentLogEntry = {
+  date: string;
+  type: LabLogType;
+  title: string;
+  summary: string;
+};
 export const labProjects: LabProject[] = [
   {
     title: "Pico MMU & Filament Systems",
@@ -41,11 +59,12 @@ export const labProjects: LabProject[] = [
     lastUpdated: "2026-07",
     maturity: 60,
     openSource: false,
-    clientFacing: false,
+    clientFacing: false,    
     summary:
       "Research and development around multi-material printing, spool monitoring, filament sensors, lane status, and Klipper integration.",
     tags: ["3D Printing", "Klipper", "Raspberry Pi Pico", "Automation"],
   },
+  
   {
     title: "SBC Enclosure System",
     overview:
