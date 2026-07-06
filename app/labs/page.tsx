@@ -5,6 +5,8 @@ import { PageHero } from "@/components/site/PageHero";
 import { PageShell } from "@/components/site/PageShell";
 import { labProjects } from "@/data/labs";
 import { createPageMetadata } from "@/lib/metadata";
+import { LabStats } from "@/components/labs/LabStats";
+import { LabStatusSummary } from "@/components/labs/LabStatusSummary";
 
 export const metadata = createPageMetadata({
   title: "Labs",
@@ -26,6 +28,8 @@ export default function LabsPage() {
       </PageHero>
 
       <ContentSection>
+        <LabStats/>
+        <LabStatusSummary />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {labProjects.map((project) => (
             <LabProjectCard key={project.slug} project={project} />

@@ -10,6 +10,8 @@ import { PageShell } from "@/components/site/PageShell";
 import { labProjects } from "@/data/labs";
 import { createPageMetadata } from "@/lib/metadata";
 import { LabMaturityBar } from "@/components/labs/LabMaturityBar";
+import { RelatedLabProjects } from "@/components/labs/RelatedLabProjects";
+import Link from "next/link";
 
 type LabsDetailPageProps = {
   params: Promise<{
@@ -61,6 +63,13 @@ export default async function LabsDetailPage({ params }: LabsDetailPageProps) {
       </PageHero>
 
       <ContentSection>
+        <Link
+            href="/labs"
+            prefetch={false}
+            className="mb-6 inline-flex text-sm font-semibold text-slate-600 transition hover:text-slate-950"
+            >
+            ← Back to Labs
+        </Link>
         <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
           <aside className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
             <div className="flex flex-wrap gap-2">
@@ -146,7 +155,7 @@ export default async function LabsDetailPage({ params }: LabsDetailPageProps) {
                 <h2 className="text-2xl font-bold tracking-tight text-slate-950">
                   Current Focus
                 </h2>
-                
+
                 <p className="mt-4">{project.currentFocus}</p>
               </section>
 
@@ -160,6 +169,8 @@ export default async function LabsDetailPage({ params }: LabsDetailPageProps) {
             </div>
           </article>
         </div>
+        <RelatedLabProjects currentSlug={project.slug} projects={labProjects} />
+
       </ContentSection>
 
       <CallToAction
