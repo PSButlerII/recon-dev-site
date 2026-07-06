@@ -2,6 +2,7 @@ import { Badge } from "@/components/site/Badge";
 import type { LabProject } from "@/data/labs";
 import { LabStatusBadge } from "./LabStatusBadge";
 import Link from "next/link";
+import { LabMaturityBar } from "@/components/labs/LabMaturityBar";
 
 type LabProjectCardProps = {
   project: LabProject;
@@ -23,10 +24,7 @@ export function LabProjectCard({ project }: LabProjectCardProps) {
       <p className="mt-4 leading-7 text-slate-600">{project.summary}</p>
 
       <div className="mt-6">
-        <div className="mb-2 flex items-center justify-between text-xs font-semibold text-slate-500">
-          <span>Maturity</span>
-          <span>{project.maturity}%</span>
-        </div>
+        <LabMaturityBar maturity={project.maturity} />
 
         <div className="h-2 rounded-full bg-slate-100">
           <div

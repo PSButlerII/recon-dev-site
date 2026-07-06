@@ -9,11 +9,12 @@ import { PageHero } from "@/components/site/PageHero";
 import { PageShell } from "@/components/site/PageShell";
 import { labProjects } from "@/data/labs";
 import { createPageMetadata } from "@/lib/metadata";
+import { LabMaturityBar } from "@/components/labs/LabMaturityBar";
 
 type LabsDetailPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 function getLabProject(slug: string) {
@@ -26,8 +27,9 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: LabsDetailPageProps) {
-  const project = getLabProject(params.slug);
+export async function generateMetadata({ params }: LabsDetailPageProps) {
+  const { slug } = await params;
+  const project = getLabProject(slug);
 
   if (!project) {
     return createPageMetadata({
@@ -44,8 +46,9 @@ export function generateMetadata({ params }: LabsDetailPageProps) {
   });
 }
 
-export default function LabsDetailPage({ params }: LabsDetailPageProps) {
-  const project = getLabProject(params.slug);
+export default async function LabsDetailPage({ params }: LabsDetailPageProps) {
+  const { slug } = await params;
+  const project = getLabProject(slug);
 
   if (!project) {
     notFound();
@@ -91,7 +94,7 @@ export default function LabsDetailPage({ params }: LabsDetailPageProps) {
                 <dd className="mt-2">
                   <div className="mb-2 flex items-center justify-between text-xs font-semibold text-slate-500">
                     <span>Progress</span>
-                    <span>{project.maturity}%</span>
+                    <LabMaturityBar maturity={project.maturity} />
                   </div>
 
                   <div className="h-2 rounded-full bg-slate-100">
@@ -136,21 +139,15 @@ export default function LabsDetailPage({ params }: LabsDetailPageProps) {
                   Overview
                 </h2>
 
-                <p className="mt-4">{project.summary}</p>
+                <p className="mt-4">{project.overview}</p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-bold tracking-tight text-slate-950">
                   Current Focus
                 </h2>
-
-                <p className="mt-4">
-                  This project is being tracked as part of Recon Dev Labs. The
-                  current focus is to continue researching practical use cases,
-                  identify blockers, document lessons learned, and determine
-                  whether the idea should become a service, internal tool,
-                  public writeup, or full project case study.
-                </p>
+                
+                <p className="mt-4">{project.currentFocus}</p>
               </section>
 
               <section>
@@ -158,11 +155,7 @@ export default function LabsDetailPage({ params }: LabsDetailPageProps) {
                   Future Direction
                 </h2>
 
-                <p className="mt-4">
-                  Future updates may include technical notes, diagrams,
-                  screenshots, GitHub links, documentation, development logs,
-                  prototypes, or deployment details as the work matures.
-                </p>
+                <p className="mt-4">{project.futureDirection}</p>
               </section>
             </div>
           </article>

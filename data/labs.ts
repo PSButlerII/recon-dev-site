@@ -19,6 +19,9 @@ export type LabProject = {
   openSource: boolean;
   clientFacing: boolean;
   summary: string;
+  overview: string;
+  currentFocus: string;
+  futureDirection: string;
   tags: string[];
 };
 
@@ -27,6 +30,12 @@ export const labProjects: LabProject[] = [
     title: "Pico MMU & Filament Systems",
     slug: "pico-mmu-filament-systems",
     status: "Active Development",
+    overview:
+      "Research and development around multi-material printing, spool monitoring, filament sensors, lane status, and Klipper integration.",
+    currentFocus:
+      "Exploring integration strategies for the Pico MMU with existing Klipper firmware and developing sensor feedback mechanisms.",
+    futureDirection:
+      "Expand the system to support additional filament types and improve the user interface for better monitoring and control.",
     category: "3D Printing / Klipper",
     started: "2025-04",
     lastUpdated: "2026-07",
@@ -39,6 +48,12 @@ export const labProjects: LabProject[] = [
   },
   {
     title: "SBC Enclosure System",
+    overview:
+      "A modular small-board-computer enclosure concept using 3D printing, laser-cut panels, airflow planning, and serviceable internal layouts.",
+    currentFocus:
+      "Designing and testing the physical structure and internal components for optimal performance and ease of maintenance.",
+    futureDirection:
+      "Refining the design based on feedback and testing results, with plans for mass production and distribution.",
     slug: "sbc-enclosure-system",
     status: "Prototype",
     category: "Product Design",
@@ -53,6 +68,12 @@ export const labProjects: LabProject[] = [
   },
   {
     title: "CoreXY Conversion Framework",
+    overview:
+      "Exploration of a generalized framework for converting common Cartesian 3D printers into CoreXY-style machines.",
+    currentFocus:
+      "Developing the theoretical foundation and practical implementation strategies for the CoreXY conversion framework.",
+    futureDirection:
+      "Expanding the framework to include more printer models and improving the user experience for developers and users.",
     slug: "corexy-conversion-framework",
     status: "Research",
     category: "Mechanical Systems",
@@ -67,6 +88,12 @@ export const labProjects: LabProject[] = [
   },
   {
     title: "Recon Dev CRM",
+    overview:
+      "A custom business management system for clients, service requests, projects, invoices, quotes, and future website intake integration.",
+    currentFocus:
+      "Developing and refining the CRM system to meet the evolving needs of Recon Dev's client base.",
+    futureDirection:
+      "Integrating with the existing website and expanding functionality to include advanced reporting and analytics.",
     slug: "recon-dev-crm",
     status: "Internal Tool",
     category: "Business Systems",
@@ -81,6 +108,12 @@ export const labProjects: LabProject[] = [
   },
   {
     title: "PERRLA Reference Extractor",
+    overview:
+      "A document-processing concept for extracting structured reference data from Word/PERRLA documents into JSON and RIS formats.",
+    currentFocus:
+      "Developing the extraction logic and validating the output against the required formats.",
+    futureDirection:
+      "Enhancing the accuracy of the extraction process and adding support for additional document types.",
     slug: "perrla-reference-extractor",
     status: "Concept",
     category: "Document Processing",
@@ -95,6 +128,12 @@ export const labProjects: LabProject[] = [
   },
   {
     title: "Food Service Platform",
+    overview:
+      "A custom meal-prep, catering, and personal-chef web platform with ordering, admin tools, scheduling, and approval workflows.",
+    currentFocus:
+      "Developing the platform's core features and user interface to meet the needs of both customers and administrators.",
+    futureDirection:
+      "Expanding the platform's capabilities to include more advanced scheduling options, integration with third-party services, and enhanced reporting features.",
     slug: "food-service-platform",
     status: "Client Work / In Progress",
     category: "Client Web Application",
