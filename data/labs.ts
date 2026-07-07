@@ -1,5 +1,13 @@
 import type { LabCategory } from "@/data/lab-categories";
 
+export type LabMilestone = {
+  id: string;
+  title: string;
+  completed: boolean;
+  completedOn?: string;
+  notes?: string;
+};
+
 export type LabProjectStatus =
   | "Concept"
   | "Research"
@@ -26,6 +34,12 @@ export type LabProject = {
   futureDirection: string;
   tags: string[];
   developmentLog: LabDevelopmentLogEntry[];
+  lessonsLearned: string[];
+  resources: {
+    label: string;
+    href: string;
+  }[];
+  milestones: LabMilestone[];
 };
 
 export type LabLogType =
@@ -43,8 +57,12 @@ export type LabDevelopmentLogEntry = {
   title: string;
   summary: string;
 };
+
 export const labProjects: LabProject[] = [
   {
+    lessonsLearned: [],
+    resources: [],
+    milestones: [],
     title: "Pico MMU & Filament Systems",
     slug: "pico-mmu-filament-systems",
     status: "Active Development",
@@ -63,9 +81,27 @@ export const labProjects: LabProject[] = [
     summary:
       "Research and development around multi-material printing, spool monitoring, filament sensors, lane status, and Klipper integration.",
     tags: ["3D Printing", "Klipper", "Raspberry Pi Pico", "Automation"],
+    developmentLog: [
+      {
+        date: "2026-07-15",
+        type: "Research",
+        title: "Initial Research on Multi-Material Printing",
+        summary:
+          "Conducted a comprehensive review of existing multi-material printing solutions and identified key areas for improvement.",
+      },
+      {
+        date: "2026-07-25",
+        type: "Prototype",
+        title: "Prototype Development for Filament Sensor System",
+        summary:
+          "Developed a functional prototype of the filament sensor system to test its feasibility and performance.",
+      }
+    ],
   },
-  
   {
+    lessonsLearned: [],
+    resources: [],
+    milestones: [],
     title: "SBC Enclosure System",
     overview:
       "A modular small-board-computer enclosure concept using 3D printing, laser-cut panels, airflow planning, and serviceable internal layouts.",
@@ -84,8 +120,28 @@ export const labProjects: LabProject[] = [
     summary:
       "A modular small-board-computer enclosure concept using 3D printing, laser-cut panels, airflow planning, and serviceable internal layouts.",
     tags: ["Product Design", "3D Printing", "Laser Cutting", "SBC"],
+    developmentLog: [
+      {
+        date: "2026-07-10",
+        type: "Prototype",
+        title: "Initial Prototype Testing",
+        summary:
+          "Tested the initial prototype of the SBC enclosure system to evaluate its performance and identify areas for improvement.",
+      },
+      {
+        date: "2026-07-20",
+        type: "Research",
+        title: "Material Selection and Testing",
+        summary:
+          "Evaluated various materials for the SBC enclosure system based on thermal properties, durability, and manufacturability.",
+      },
+      
+    ],
   },
   {
+    lessonsLearned: [],
+    resources: [],
+    milestones: [],
     title: "CoreXY Conversion Framework",
     overview:
       "Exploration of a generalized framework for converting common Cartesian 3D printers into CoreXY-style machines.",
@@ -104,8 +160,27 @@ export const labProjects: LabProject[] = [
     summary:
       "Exploration of a generalized framework for converting common Cartesian 3D printers into CoreXY-style machines.",
     tags: ["Mechanical Design", "Research", "3D Printing"],
+    developmentLog: [
+      {
+        date: "2026-07-15",
+        type: "Research",
+        title: "Initial Research on CoreXY Conversion",
+        summary:
+          "Conducted a comprehensive review of existing CoreXY conversion methods and identified key challenges and opportunities.",
+      },
+      {
+        date: "2026-07-25",
+        type: "Prototype",
+        title: "Prototype Development for CoreXY Conversion",
+        summary:
+          "Developed a functional prototype of the CoreXY conversion framework to test its feasibility and performance.",
+      }
+    ],
   },
   {
+    lessonsLearned: [],
+    resources: [],
+    milestones: [],
     title: "Recon Dev CRM",
     overview:
       "A custom business management system for clients, service requests, projects, invoices, quotes, and future website intake integration.",
@@ -124,8 +199,20 @@ export const labProjects: LabProject[] = [
     summary:
       "A custom business management system for clients, service requests, projects, invoices, quotes, and future website intake integration.",
     tags: ["Next.js", "CRM", "Internal Systems", "Automation"],
+    developmentLog: [
+      {
+        date: "2026-07-10",
+        type: "Research",
+        title: "Initial Research on CRM Features",
+        summary:
+          "Conducted a comprehensive review of existing CRM solutions and identified key features and functionalities.",
+      }
+    ],
   },
   {
+    lessonsLearned: [],
+    resources: [],
+    milestones: [],
     title: "PERRLA Reference Extractor",
     overview:
       "A document-processing concept for extracting structured reference data from Word/PERRLA documents into JSON and RIS formats.",
@@ -144,8 +231,20 @@ export const labProjects: LabProject[] = [
     summary:
       "A document-processing concept for extracting structured reference data from Word/PERRLA documents into JSON and RIS formats.",
     tags: ["Python", "Document Processing", "Research Tools"],
+    developmentLog: [
+      {
+        date: "2026-07-10",
+        type: "Research",
+        title: "Initial Research on Reference Extraction",
+        summary:
+          "Conducted a comprehensive review of existing reference extraction methods and identified key challenges and opportunities.",
+      }
+    ],
   },
   {
+    lessonsLearned: [],
+    resources: [],
+    milestones: [],
     title: "Food Service Platform",
     overview:
       "A custom meal-prep, catering, and personal-chef web platform with ordering, admin tools, scheduling, and approval workflows.",
@@ -164,5 +263,23 @@ export const labProjects: LabProject[] = [
     summary:
       "A custom meal-prep, catering, and personal-chef web platform with ordering, admin tools, scheduling, and approval workflows.",
     tags: ["Next.js", "Food Service", "Admin Tools", "Workflow"],
+    developmentLog: [
+      {
+        date: "2026-07-10",
+        type: "Research",
+        title: "Initial Research on Food Service Platform",
+        summary:
+          "Conducted a comprehensive review of existing food service platforms and identified key features and functionalities.",
+      },
+      {
+        date: "2026-07-20",
+        type: "Prototype",
+        title: "Prototype Development for Food Service Platform",
+        summary:
+          "Developed a functional prototype of the food service platform to test its feasibility and performance.",
+
+      }
+    ],
   },
 ];
+

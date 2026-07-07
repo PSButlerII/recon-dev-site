@@ -11,6 +11,10 @@ import { labProjects } from "@/data/labs";
 import { createPageMetadata } from "@/lib/metadata";
 import { LabMaturityBar } from "@/components/labs/LabMaturityBar";
 import { RelatedLabProjects } from "@/components/labs/RelatedLabProjects";
+import { LabDevelopmentLog } from "@/components/labs/LabDevelopmentLog";
+import { LabLessons } from "@/components/labs/LabLessons";
+import { LabMilestones } from "@/components/labs/LabMilestones";
+import { LabResources } from "@/components/labs/LabResources";
 import Link from "next/link";
 
 type LabsDetailPageProps = {
@@ -153,6 +157,14 @@ export default async function LabsDetailPage({ params }: LabsDetailPageProps) {
 
               <section>
                 <h2 className="text-2xl font-bold tracking-tight text-slate-950">
+                  Milestones
+                </h2>
+
+                <LabMilestones milestones={project.milestones} className="mt-4" />
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-bold tracking-tight text-slate-950">
                   Current Focus
                 </h2>
 
@@ -163,7 +175,9 @@ export default async function LabsDetailPage({ params }: LabsDetailPageProps) {
                 <h2 className="text-2xl font-bold tracking-tight text-slate-950">
                   Future Direction
                 </h2>
-
+                <LabDevelopmentLog entries={project.developmentLog} />
+                <LabLessons lessons={project.lessonsLearned} />
+                <LabResources resources={project.resources} />
                 <p className="mt-4">{project.futureDirection}</p>
               </section>
             </div>
