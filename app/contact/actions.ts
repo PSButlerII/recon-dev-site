@@ -3,7 +3,6 @@
 import { sendInquiryToCrm } from "@/lib/crm";
 import { buildContactInquiry } from "@/lib/build-contact-inquiry";
 import { sendContactInquiryEmail } from "@/lib/email";
-import { toCrmPayload } from "@/lib/intake";
 import { logError, logInfo } from "@/lib/logger";
 import { parseContactForm } from "@/lib/parse-contact-form";
 import { canSubmit } from "@/lib/security";
@@ -49,8 +48,15 @@ export async function submitContactForm(
 
   const inquiry = buildContactInquiry(parsedInquiry);
 
-  logInfo("New Recon Dev inquiry", inquiry);
-  logInfo("CRM Payload", toCrmPayload(inquiry));
+  logInfo("New Recon Dev inquiry", {
+    inquiryId: inquiry.inquiryId,
+    source: inquiry.source,
+    projectType: inquiry.projectType,
+    submittedAt: inquiry.submittedAt,
+    hasCompany: Boolean(inquiry.company),
+    hasPhone: Boolean(inquiry.phone),
+    hasMessage: Boolean(inquiry.message),
+  });
 
   const emailResult = await sendContactInquiryEmail(inquiry);
 
