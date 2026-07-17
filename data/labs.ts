@@ -392,22 +392,95 @@ export const labProjects: LabProject[] = [
 },
   },
   {
-    lessonsLearned: [],
-    designDecisions: [],
-    tradeoffs: [],
-    knownLimitations: [],
-    futureImprovements: [],
+    lessonsLearned: [
+      "Keeping email delivery and CRM synchronization separate allows website intake to continue when the CRM connection is not configured or a sync attempt fails.",
+      "A stable inquiry identifier needs to cross the integration boundary so the receiving system can reject duplicate submissions.",
+      "Server-to-server integration keeps CRM credentials and signing material out of browser code.",
+      "Signed, timestamped requests provide the receiver with verification inputs, but replay and duplicate protection still need to be enforced by the receiving endpoint.",
+      "Separating lifecycle entities preserves the distinction between an initial request, active project work, and financial records.",
+      "Automatically generated activity history improves traceability without depending on users to restate each lifecycle change in a note.",
+    ],
+    designDecisions: [
+      {
+        title: "Separate business entities by lifecycle stage",
+        decision:
+          "Represent Clients, Service Requests, Projects, Quotes, and Invoices as separate entities because each describes a different stage of the client lifecycle. Activities and Notes provide supporting history rather than expanding one customer record indefinitely.",
+      },
+      {
+        title: "Replace temporary client state with persistence",
+        decision:
+          "Move business records out of client-side temporary state so they survive reloads and can support future multi-user access.",
+      },
+      {
+        title: "Centralize business operations in API routes",
+        decision:
+          "Keep the UI focused on interaction and place persistence and business rules behind explicit API operations.",
+      },
+      {
+        title: "Make entity conversions atomic and idempotent",
+        decision:
+          "Treat conversions between requests, projects, quotes, and related records as single repeat-safe operations so repeated actions cannot create duplicate business records.",
+      },
+      {
+        title: "Generate activity history automatically",
+        decision:
+          "Create activity records for important lifecycle changes so the system maintains traceability without requiring a separate manual note for every transition.",
+      },
+      {
+        title: "Accept website inquiries through a server boundary",
+        decision:
+          "Use the public website as a future intake source through a server-to-server request. The existing website adapter sends a typed inquiry payload with bearer authorization, a timestamp, and an HMAC signature when integration is configured.",
+      },
+    ],
+    tradeoffs: [
+      {
+        choice: "Internal workflow optimization versus public SaaS product",
+        reason:
+          "Focusing on Recon Dev's operating workflow keeps the model and interface specific to actual internal needs, but does not prioritize the tenant isolation, broad configurability, or onboarding required by a generic CRM product.",
+      },
+      {
+        choice: "Practical simplicity versus enterprise feature depth",
+        reason:
+          "A smaller set of explicit workflows is easier to maintain and use, while leaving advanced enterprise features outside the current scope.",
+      },
+      {
+        choice: "Incremental persistence migration versus complete rewrite",
+        reason:
+          "Incremental migration allows existing workflows to remain available while records move to durable storage, but temporarily requires coordination between migrated and remaining temporary state.",
+      },
+      {
+        choice: "Strong typing and explicit APIs versus rapid feature additions",
+        reason:
+          "Typed entities and explicit operations make lifecycle boundaries and integration contracts clearer, at the cost of more design work before adding new behavior.",
+      },
+    ],
+    knownLimitations: [
+      "The website-to-CRM sync remains disabled unless all required server-side integration settings are configured.",
+      "The receiving CRM endpoint is outside this repository, so its persistence, payload validation, replay protection, duplicate-inquiry enforcement, and rate limiting cannot be verified here.",
+      "The website adapter logs failed CRM responses but does not provide a retry queue for unsuccessful synchronization.",
+      "The CRM application, persistence schema, entity relationships, authentication, and permissions are not present in this repository and cannot be verified from this codebase.",
+      "Customer portal functionality remains future work.",
+    ],
+    futureImprovements: [
+      "Complete the migration from temporary client state to durable persistence.",
+      "Move remaining business operations behind explicit API routes.",
+      "Implement atomic, idempotent conversions between lifecycle entities.",
+      "Generate activity records automatically for important state changes and conversions.",
+      "Connect website intake to a receiving endpoint that enforces signature validation, timestamp and replay checks, payload limits, duplicate inquiry identifiers, logging, and rate limiting.",
+      "Add customer portal functionality after the internal entity and permission model is established.",
+      "Add reporting and analytics after the underlying records and relationships are persistent.",
+    ],
     downloads: [],
     references: [],
     resources: [],
     milestones: [],
     title: "Recon Dev CRM",
     overview:
-      "A custom business management system for clients, service requests, projects, invoices, quotes, and future website intake integration.",
+      "An internal business-management platform for Recon Dev that separates Clients, Service Requests, Projects, Quotes, Invoices, Activities, and Notes across the client lifecycle. It is intended to reduce duplicate administrative work, preserve operational history, accept website inquiries, and support future customer access without becoming a generic CRM product.",
     currentFocus:
-      "Developing and refining the CRM system to meet the evolving needs of Recon Dev's client base.",
+      "Current architecture work is replacing temporary client-side state with durable persistence, keeping business operations behind explicit APIs, defining repeat-safe conversions between entities, and generating activity history for significant lifecycle changes.",
     futureDirection:
-      "Integrating with the existing website and expanding functionality to include advanced reporting and analytics.",
+      "Complete the persistence and entity-operation foundation, connect the existing signed website-intake adapter to the receiving CRM endpoint, then add reporting and a customer portal on top of authenticated, permission-aware workflows.",
     slug: "recon-dev-crm",
     status: "Internal Tool",
     category: "Business Systems",
@@ -420,12 +493,26 @@ export const labProjects: LabProject[] = [
     tags: ["Next.js", "CRM", "Internal Systems", "Automation"],
     developmentLog: [
       {
-        date: "2026-07-10",
-        type: "Research",
-        title: "Initial Research on CRM Features",
+        date: "2026-07-05",
+        type: "Build",
+        title: "Website CRM request contract tightened",
         summary:
-          "Conducted a comprehensive review of existing CRM solutions and identified key features and functionalities.",
-      }
+          "Updated the website adapter to require its signing configuration, use a Unix timestamp in the signature contract, and retain response details for failed server-side sync diagnostics.",
+      },
+      {
+        date: "2026-05-19",
+        type: "Documentation",
+        title: "Signed intake transport documented",
+        summary:
+          "Added HMAC signing and timestamp headers to the website-side CRM request and documented receiver requirements for HTTPS, validation, replay protection, duplicate inquiry identifiers, payload limits, logging, and rate limiting.",
+      },
+      {
+        date: "2026-05-17",
+        type: "Build",
+        title: "Structured website inquiry adapter introduced",
+        summary:
+          "Added a typed ContactInquiry payload, generated inquiry identifiers, CRM payload mapping, and an optional server-to-server synchronization step after email delivery.",
+      },
     ],
     engineeringLifecycle: {
   discovery: true,
