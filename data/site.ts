@@ -1,5 +1,3 @@
-import { Accessibility } from "lucide-react";
-
 export const siteConfig = {
   name: "Recon Dev LLC",
   tagline: "Research. Build. Support.",
@@ -14,6 +12,7 @@ export const siteConfig = {
     { label: "Services", href: "/services" },
     { label: "Projects", href: "/projects" },
     { label: "Packages", href: "/packages" },
+    { label: "Labs", href: "/labs" },
     { label: "Process", href: "/process" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
@@ -21,6 +20,6 @@ export const siteConfig = {
   footerNav: [
     { label: "Privacy", href: "/privacy" },
     { label: "Terms", href: "/terms" },
-    {label:"Accessibility", href: "/accessibility"}
+    { label: "Accessibility", href: "/accessibility" },
   ],
 };

@@ -1,8 +1,10 @@
-import { Container } from "@/components/site/Container";
 import Link from "next/link";
-import{ siteConfig } from "@/data/site";
+import { Container } from "@/components/site/Container";
+import { siteConfig } from "@/data/site";
 
 export function SiteFooter() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="border-t border-slate-200 bg-white py-10">
       <Container>
@@ -28,7 +30,10 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-1 sm:grid-cols-3">
+          <nav
+            className="grid grid-cols-2 gap-1 sm:grid-cols-3"
+            aria-label="Footer primary"
+          >
             {siteConfig.nav.map((item) => (
               <Link
                 key={item.href}
@@ -39,17 +44,13 @@ export function SiteFooter() {
                 {item.label}
               </Link>
             ))}
-           
-          </div>
-          
+          </nav>
         </div>
 
         <div className="mt-10 flex flex-col gap-4 border-t border-slate-200 pt-6 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
-          <p>
-            © {2023} {siteConfig.name}. All rights reserved.
-          </p>
+          <p>© {currentYear} {siteConfig.name}. All rights reserved.</p>
 
-          <div className="flex flex-wrap items-center gap-4">
+          <nav className="flex flex-wrap items-center gap-4" aria-label="Legal">
             {siteConfig.footerNav.map((item) => (
               <Link
                 key={item.href}
@@ -60,7 +61,7 @@ export function SiteFooter() {
                 {item.label}
               </Link>
             ))}
-          </div>
+          </nav>
         </div>
       </Container>
     </footer>
