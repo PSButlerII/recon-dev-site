@@ -87,8 +87,14 @@ export const labProjects: LabProject[] = [
     lessonsLearned: [],
     designDecisions: [],
     tradeoffs: [],
-    knownLimitations: [],
-    futureImprovements: [],
+    knownLimitations: [
+      "The repository does not document a finalized Klipper integration or Pico communication approach.",
+      "Sensor feedback behavior remains under exploration, with no validation results recorded in the repository.",
+    ],
+    futureImprovements: [
+      "Expand support to additional filament types.",
+      "Improve the monitoring and control interface.",
+    ],
     downloads: [],
     references: [],
     resources: [],
@@ -97,11 +103,11 @@ export const labProjects: LabProject[] = [
     slug: "pico-mmu-filament-systems",
     status: "Active Development",
     overview:
-      "Research and development around multi-material printing, spool monitoring, filament sensors, lane status, and Klipper integration.",
+      "An active research and development effort covering a Raspberry Pi Pico-based multi-material unit and related filament systems, including spool monitoring, filament sensing, lane status, automation, and Klipper integration.",
     currentFocus:
-      "Exploring integration strategies for the Pico MMU with existing Klipper firmware and developing sensor feedback mechanisms.",
+      "Evaluating how the Pico MMU can integrate with Klipper and how sensor feedback can represent filament and lane state. The repository does not yet document a finalized communication or hardware-control approach.",
     futureDirection:
-      "Expand the system to support additional filament types and improve the user interface for better monitoring and control.",
+      "Continue defining the Klipper integration and sensor feedback approach, then expand filament support and improve the monitoring and control interface.",
     category: "3D Printing / Klipper",
     started: "2025-04",
     lastUpdated: "2026-07",
@@ -110,22 +116,7 @@ export const labProjects: LabProject[] = [
     summary:
       "Research and development around multi-material printing, spool monitoring, filament sensors, lane status, and Klipper integration.",
     tags: ["3D Printing", "Klipper", "Raspberry Pi Pico", "Automation"],
-    developmentLog: [
-      {
-        date: "2026-07-15",
-        type: "Research",
-        title: "Initial Research on Multi-Material Printing",
-        summary:
-          "Conducted a comprehensive review of existing multi-material printing solutions and identified key areas for improvement.",
-      },
-      {
-        date: "2026-07-25",
-        type: "Prototype",
-        title: "Prototype Development for Filament Sensor System",
-        summary:
-          "Developed a functional prototype of the filament sensor system to test its feasibility and performance.",
-      }
-    ],
+    developmentLog: [],
     engineeringLifecycle: {
   discovery: true,
   research: true,
