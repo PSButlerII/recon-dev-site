@@ -198,22 +198,123 @@ export const labProjects: LabProject[] = [
 },
   },
   {
-    lessonsLearned: [],
-    designDecisions: [],
-    tradeoffs: [],
-    knownLimitations: [],
-    futureImprovements: [],
+    lessonsLearned: [
+      "Manufacturing methods need to shape the enclosure architecture from the beginning.",
+      "A visually appealing tambour system still needs practical installation and service access.",
+      "Track geometry, door travel, and end stops need to be designed together.",
+      "Universal mounting requires modular interfaces rather than permanent board-specific cutouts.",
+      "Service access is easier to preserve when the raised-floor space is treated as a separate subsystem.",
+      "A single CAD tool may not be ideal for both printable solids and laser-cut templates.",
+      "Hinge placement needs to be tested against actual door motion rather than judged only from static renders.",
+    ],
+    designDecisions: [
+      {
+        title: "Use hybrid manufacturing",
+        decision:
+          "Use 3D-printed parts for the main enclosure structure and laser-cut parts for the tambour door. Each process is applied to the geometry it can produce more practically with the available equipment.",
+      },
+      {
+        title: "Assemble the enclosure from multiple parts",
+        decision:
+          "Divide the enclosure into separately manufactured components. The Ender 3 V3 SE build volume and the need for replaceable, serviceable parts make a single-piece enclosure impractical.",
+      },
+      {
+        title: "Include a raised-floor service plenum",
+        decision:
+          "Reserve approximately 20 mm below the main equipment area for cable management, mounting, airflow routing, and maintenance access.",
+      },
+      {
+        title: "Use a universal SBC mounting plate",
+        decision:
+          "Mount boards to a replaceable under-floor plate so multiple SBC layouts can be supported without redesigning the enclosure shell.",
+      },
+      {
+        title: "Use a modular IO shield",
+        decision:
+          "Keep connector openings on replaceable shields, including an ATX-style concept considered for Raspberry Pi 5 support, rather than making board-specific openings permanent.",
+      },
+      {
+        title: "Provide an internally hinged bottom service door",
+        decision:
+          "Use a bottom swing-open door with internal hinges to provide broad access to the plenum while keeping hinge hardware protected and the exterior visually clean.",
+      },
+      {
+        title: "Generate manufacturing geometry with Python and Trimesh",
+        decision:
+          "Prefer Python and Trimesh over an OpenSCAD-only workflow for accurate, renderable geometry and direct STL generation. OpenSCAD may remain as an optional reference format.",
+      },
+      {
+        title: "Separate laser and print outputs",
+        decision:
+          "Generate SVG or DXF-style templates for laser-cut door and panel parts separately from STL structural components because the processes require different file formats and tolerances.",
+      },
+    ],
+    tradeoffs: [
+      {
+        choice: "Tambour door versus hinged or removable lid",
+        reason:
+          "A bread-box-style tambour provides full-top access with compact opening motion, but adds track, slat, friction, stop, and assembly complexity.",
+      },
+      {
+        choice: "Universal versus board-specific enclosure",
+        reason:
+          "A universal enclosure is reusable across SBC models, but requires modular mounts and IO plates and may use more space than a board-specific shell.",
+      },
+      {
+        choice: "Wood tambour parts versus printed plastic",
+        reason:
+          "Wood or wood-like materials suit the available laser and provide a different appearance, but thickness, warping, friction, and laser kerf need to be managed. The final material is not selected.",
+      },
+      {
+        choice: "Raised-floor plenum versus minimal height",
+        reason:
+          "The plenum improves service access, cable routing, and airflow options, but increases the enclosure's overall height and volume.",
+      },
+      {
+        choice: "Internal versus exposed hinges",
+        reason:
+          "Internal hinges improve protection and keep the exterior cleaner, but are more difficult to align, clear, and manufacture.",
+      },
+      {
+        choice: "OpenSCAD versus Python and Trimesh",
+        reason:
+          "OpenSCAD remains useful for parametric reference designs, while Python and Trimesh provide the programmatic geometry and output control preferred for this manufacturing workflow.",
+      },
+    ],
+    knownLimitations: [
+      "The tambour track and slat geometry still require physical validation.",
+      "The final wood species and material thickness have not been selected.",
+      "Laser kerf and material-specific tolerances are not finalized.",
+      "The universal mounting system has not been validated across a broad range of SBCs.",
+      "EMI mitigation has not been physically tested.",
+      "Airflow has not been measured with the final hardware installed.",
+      "The bottom service-door hinges and clearances require prototype validation.",
+      "The design is not production-ready.",
+      "Final printable and laser-cut file packages have not been prepared.",
+    ],
+    futureImprovements: [
+      "Generate accurate STL components with Python and Trimesh.",
+      "Generate SVG or DXF tambour and panel templates for the laser.",
+      "Prototype and test track friction, clearances, door travel, and stops.",
+      "Finalize the universal SBC mounting plate.",
+      "Develop several modular IO-shield examples.",
+      "Test airflow with representative SBCs and fans.",
+      "Evaluate EMI-lining or shielding options.",
+      "Validate the bottom service-door hinge design.",
+      "Create an assembly guide and bill of materials.",
+      "Produce a manufacturable prototype with the Ender 3 V3 SE and Creality Falcon 10W.",
+    ],
     downloads: [],
     references: [],
     resources: [],
     milestones: [],
     title: "SBC Enclosure System",
     overview:
-      "A modular small-board-computer enclosure concept using 3D printing, laser-cut panels, airflow planning, and serviceable internal layouts.",
+      "A modular enclosure system for multiple small-board computer models, with current working dimensions of approximately 140 × 200 × 90 mm. The design combines a multi-part 3D-printed structure, a laser-cut bread-box-style tambour door, a raised-floor service plenum, replaceable mounting and IO interfaces, and internal airflow routing.",
     currentFocus:
-      "Designing and testing the physical structure and internal components for optimal performance and ease of maintenance.",
+      "Current work is focused on producing accurate STL geometry with Python and Trimesh, defining separately installable tambour slats and visible internal tracks, correcting the internally hinged bottom service door, and developing universal SBC mounting and modular IO-shield interfaces within the available printer and laser limits.",
     futureDirection:
-      "Refining the design based on feedback and testing results, with plans for mass production and distribution.",
+      "Build a manufacturable prototype, validate door travel and service access, measure airflow with representative hardware, evaluate EMI mitigation, and prepare separate printable and laser-cut outputs with assembly documentation.",
     slug: "sbc-enclosure-system",
     status: "Prototype",
     category: "Product Design",
@@ -224,23 +325,7 @@ export const labProjects: LabProject[] = [
     summary:
       "A modular small-board-computer enclosure concept using 3D printing, laser-cut panels, airflow planning, and serviceable internal layouts.",
     tags: ["Product Design", "3D Printing", "Laser Cutting", "SBC"],
-    developmentLog: [
-      {
-        date: "2026-07-10",
-        type: "Prototype",
-        title: "Initial Prototype Testing",
-        summary:
-          "Tested the initial prototype of the SBC enclosure system to evaluate its performance and identify areas for improvement.",
-      },
-      {
-        date: "2026-07-20",
-        type: "Research",
-        title: "Material Selection and Testing",
-        summary:
-          "Evaluated various materials for the SBC enclosure system based on thermal properties, durability, and manufacturability.",
-      },
-      
-    ],
+    developmentLog: [],
     engineeringLifecycle: {
   discovery: true,
   research: true,
