@@ -6,16 +6,17 @@ export const dynamic = "force-dynamic";
 
 export function GET(request: NextRequest) {
   const unauthorized = requireHealthToken(request);
-  const env = validateEnvironment();
 
   if (unauthorized) {
     return unauthorized;
   }
 
-    return NextResponse.json({
+  const env = validateEnvironment();
+
+  return NextResponse.json({
     status: env.valid ? "ok" : "warning",
     appVersion: process.env.NEXT_PUBLIC_APP_VERSION ?? "local",
     buildTime: process.env.NEXT_PUBLIC_BUILD_TIME ?? "unknown",
     nodeEnv: process.env.NODE_ENV,
-    });
+  });
 }

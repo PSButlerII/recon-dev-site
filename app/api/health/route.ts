@@ -6,14 +6,14 @@ export const dynamic = "force-dynamic";
 
 export function GET(request: NextRequest) {
   const unauthorized = requireHealthToken(request);
-  const env = validateEnvironment();
- 
+
   if (unauthorized) {
     return unauthorized;
   }
-  
- return NextResponse.json({
+
+  const env = validateEnvironment();
+
+  return NextResponse.json({
     status: env.valid ? "ok" : "warning",
   });
-
 }
