@@ -1,4 +1,9 @@
 import type { LabCategory } from "@/data/lab-categories";
+import type {
+  EngineeringLifecycle,
+  EngineeringLifecyclePhase,
+} from "@/data/engineering-lifecycle";
+
 
 export type LabMilestone = {
   id: string;
@@ -25,7 +30,6 @@ export type LabProject = {
   category: LabCategory;
   started: string;
   lastUpdated: string;
-  maturity: number;
   openSource: boolean;
   clientFacing: boolean;
   summary: string;
@@ -40,6 +44,7 @@ export type LabProject = {
     href: string;
   }[];
   milestones: LabMilestone[];
+  engineeringLifecycle: EngineeringLifecycle;
 };
 
 export type LabLogType =
@@ -54,6 +59,7 @@ export type LabLogType =
 export type LabDevelopmentLogEntry = {
   date: string;
   type: LabLogType;
+  phase?: EngineeringLifecyclePhase;
   title: string;
   summary: string;
 };
@@ -75,7 +81,6 @@ export const labProjects: LabProject[] = [
     category: "3D Printing / Klipper",
     started: "2025-04",
     lastUpdated: "2026-07",
-    maturity: 60,
     openSource: false,
     clientFacing: false,    
     summary:
@@ -97,6 +102,16 @@ export const labProjects: LabProject[] = [
           "Developed a functional prototype of the filament sensor system to test its feasibility and performance.",
       }
     ],
+    engineeringLifecycle: {
+  discovery: true,
+  research: true,
+  planning: true,
+  prototype: true,
+  validation: false,
+  documentation: false,
+  release: false,
+  maintenance: false,
+},
   },
   {
     lessonsLearned: [],
@@ -114,7 +129,6 @@ export const labProjects: LabProject[] = [
     category: "Product Design",
     started: "2025-01",
     lastUpdated: "2026-07",
-    maturity: 45,
     openSource: false,
     clientFacing: false,
     summary:
@@ -137,6 +151,16 @@ export const labProjects: LabProject[] = [
       },
       
     ],
+    engineeringLifecycle: {
+  discovery: true,
+  research: true,
+  planning: true,
+  prototype: true,
+  validation: false,
+  documentation: false,
+  release: false,
+  maintenance: false,
+},
   },
   {
     lessonsLearned: [],
@@ -154,7 +178,6 @@ export const labProjects: LabProject[] = [
     category: "Mechanical Systems",
     started: "2026-06",
     lastUpdated: "2026-07",
-    maturity: 25,
     openSource: false,
     clientFacing: false,
     summary:
@@ -176,6 +199,16 @@ export const labProjects: LabProject[] = [
           "Developed a functional prototype of the CoreXY conversion framework to test its feasibility and performance.",
       }
     ],
+    engineeringLifecycle: {
+  discovery: true,
+  research: true,
+  planning: true,
+  prototype: true,
+  validation: false,
+  documentation: false,
+  release: false,
+  maintenance: false,
+},
   },
   {
     lessonsLearned: [],
@@ -193,7 +226,6 @@ export const labProjects: LabProject[] = [
     category: "Business Systems",
     started: "2026-05",
     lastUpdated: "2026-07",
-    maturity: 70,
     openSource: false,
     clientFacing: false,
     summary:
@@ -208,6 +240,16 @@ export const labProjects: LabProject[] = [
           "Conducted a comprehensive review of existing CRM solutions and identified key features and functionalities.",
       }
     ],
+    engineeringLifecycle: {
+  discovery: true,
+  research: true,
+  planning: true,
+  prototype: true,
+  validation: false,
+  documentation: false,
+  release: false,
+  maintenance: false,
+},
   },
   {
     lessonsLearned: [],
@@ -225,7 +267,6 @@ export const labProjects: LabProject[] = [
     category: "Document Processing",
     started: "2026-06",
     lastUpdated: "2026-07",
-    maturity: 15,
     openSource: false,
     clientFacing: false,
     summary:
@@ -240,6 +281,16 @@ export const labProjects: LabProject[] = [
           "Conducted a comprehensive review of existing reference extraction methods and identified key challenges and opportunities.",
       }
     ],
+    engineeringLifecycle: {
+  discovery: true,
+  research: true,
+  planning: true,
+  prototype: true,
+  validation: false,
+  documentation: false,
+  release: false,
+  maintenance: false,
+},
   },
   {
     lessonsLearned: [],
@@ -257,7 +308,6 @@ export const labProjects: LabProject[] = [
     category: "Client Web Application",
     started: "2026-05",
     lastUpdated: "2026-07",
-    maturity: 65,
     openSource: false,
     clientFacing: true,
     summary:
@@ -280,6 +330,16 @@ export const labProjects: LabProject[] = [
 
       }
     ],
+    engineeringLifecycle: {
+  discovery: true,
+  research: true,
+  planning: true,
+  prototype: true,
+  validation: false,
+  documentation: false,
+  release: false,
+  maintenance: false,
+},
   },
 ];
 

@@ -107,13 +107,13 @@ export default async function LabsDetailPage({ params }: LabsDetailPageProps) {
                 <dd className="mt-2">
                   <div className="mb-2 flex items-center justify-between text-xs font-semibold text-slate-500">
                     <span>Progress</span>
-                    <LabMaturityBar maturity={project.maturity} />
+                    <LabMaturityBar lifecycle={project.engineeringLifecycle} />
                   </div>
 
                   <div className="h-2 rounded-full bg-slate-100">
                     <div
                       className="h-2 rounded-full bg-slate-950"
-                      style={{ width: `${project.maturity}%` }}
+                      style={{ width: `${project.engineeringLifecycle}%` }}
                     />
                   </div>
                 </dd>

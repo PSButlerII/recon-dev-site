@@ -24,12 +24,12 @@ export function LabProjectCard({ project }: LabProjectCardProps) {
       <p className="mt-4 leading-7 text-slate-600">{project.summary}</p>
 
       <div className="mt-6">
-        <LabMaturityBar maturity={project.maturity} />
+        <LabMaturityBar lifecycle={project.engineeringLifecycle} />
 
         <div className="h-2 rounded-full bg-slate-100">
           <div
             className="h-2 rounded-full bg-slate-950"
-            style={{ width: `${project.maturity}%` }}
+            style={{ width: `${project.engineeringLifecycle}%` }}
           />
         </div>
       </div>
