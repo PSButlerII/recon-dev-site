@@ -6,21 +6,68 @@ param (
     [string]$HealthToken
 )
 
+$BaseUrl = $BaseUrl.TrimEnd("/")
+
+$BrowserHeaders = @{
+    "User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/125 Safari/537.36"
+    "Accept" = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+}
+
+$ProtectedHeaders = @{
+    "User-Agent" = $BrowserHeaders["User-Agent"]
+    "Accept" = "application/json,text/plain,*/*"
+    "x-health-token" = $HealthToken
+}
+
+function Test-JsonEndpoint {
+    param (
+        [string]$Label,
+        [string]$Url
+    )
+
+    Write-Host "`nChecking $Label..." -ForegroundColor Yellow
+
+    try {
+        $response = Invoke-RestMethod `
+            -Uri $Url `
+            -Headers $ProtectedHeaders `
+            -Method Get
+
+        $response | ConvertTo-Json
+        Write-Host "OK $Label" -ForegroundColor Green
+    }
+    catch {
+        Write-Host "FAILED $Label" -ForegroundColor Red
+        Write-Host $_.Exception.Message
+    }
+}
+
+function Test-PublicUrl {
+    param (
+        [string]$Path
+    )
+
+    $url = "$BaseUrl$Path"
+
+    try {
+        $response = Invoke-WebRequest `
+            -Uri $url `
+            -UseBasicParsing `
+            -Headers $BrowserHeaders `
+            -Method Get
+
+        Write-Host "OK $Path $($response.StatusCode)" -ForegroundColor Green
+    }
+    catch {
+        Write-Host "FAILED $Path" -ForegroundColor Red
+        Write-Host $_.Exception.Message
+    }
+}
+
 Write-Host "Checking deployment at $BaseUrl..." -ForegroundColor Cyan
 
-Write-Host "`nChecking /api/health..." -ForegroundColor Yellow
-$health = Invoke-RestMethod `
-  -Uri "$BaseUrl/api/health" `
-  -Headers @{ "x-health-token" = $HealthToken }
-
-$health | ConvertTo-Json
-
-Write-Host "`nChecking /api/version..." -ForegroundColor Yellow
-$version = Invoke-RestMethod `
-  -Uri "$BaseUrl/api/version" `
-  -Headers @{ "x-health-token" = $HealthToken }
-
-$version | ConvertTo-Json
+Test-JsonEndpoint -Label "/api/health" -Url "$BaseUrl/api/health"
+Test-JsonEndpoint -Label "/api/version" -Url "$BaseUrl/api/version"
 
 Write-Host "`nChecking public pages..." -ForegroundColor Yellow
 
@@ -38,16 +85,7 @@ $pages = @(
 )
 
 foreach ($page in $pages) {
-    $url = "$BaseUrl$page"
-
-    try {
-        $response = Invoke-WebRequest -Uri $url -UseBasicParsing
-        Write-Host "OK $page $($response.StatusCode)" -ForegroundColor Green
-    }
-    catch {
-        Write-Host "FAILED $page" -ForegroundColor Red
-        Write-Host $_.Exception.Message
-    }
+    Test-PublicUrl -Path $page
 }
 
 Write-Host "`nChecking public assets..." -ForegroundColor Yellow
@@ -61,16 +99,7 @@ $assets = @(
 )
 
 foreach ($asset in $assets) {
-    $url = "$BaseUrl$asset"
-
-    try {
-        $response = Invoke-WebRequest -Uri $url -UseBasicParsing
-        Write-Host "OK $asset $($response.StatusCode)" -ForegroundColor Green
-    }
-    catch {
-        Write-Host "FAILED $asset" -ForegroundColor Red
-        Write-Host $_.Exception.Message
-    }
+    Test-PublicUrl -Path $asset
 }
 
 Write-Host "`nDeployment check complete." -ForegroundColor Cyan
