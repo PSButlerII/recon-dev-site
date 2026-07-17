@@ -13,6 +13,21 @@ export type LabMilestone = {
   notes?: string;
 };
 
+export type LabDesignDecision = {
+  title: string;
+  decision: string;
+};
+
+export type LabTradeoff = {
+  choice: string;
+  reason: string;
+};
+
+export type LabLink = {
+  label: string;
+  href: string;
+};
+
 export type LabProjectStatus =
   | "Concept"
   | "Research"
@@ -39,10 +54,13 @@ export type LabProject = {
   tags: string[];
   developmentLog: LabDevelopmentLogEntry[];
   lessonsLearned: string[];
-  resources: {
-    label: string;
-    href: string;
-  }[];
+  designDecisions: LabDesignDecision[];
+  tradeoffs: LabTradeoff[];
+  knownLimitations: string[];
+  futureImprovements: string[];
+  downloads: LabLink[];
+  references: LabLink[];
+  resources: LabLink[];
   milestones: LabMilestone[];
   engineeringLifecycle: EngineeringLifecycle;
 };
@@ -67,6 +85,12 @@ export type LabDevelopmentLogEntry = {
 export const labProjects: LabProject[] = [
   {
     lessonsLearned: [],
+    designDecisions: [],
+    tradeoffs: [],
+    knownLimitations: [],
+    futureImprovements: [],
+    downloads: [],
+    references: [],
     resources: [],
     milestones: [],
     title: "Pico MMU & Filament Systems",
@@ -115,6 +139,12 @@ export const labProjects: LabProject[] = [
   },
   {
     lessonsLearned: [],
+    designDecisions: [],
+    tradeoffs: [],
+    knownLimitations: [],
+    futureImprovements: [],
+    downloads: [],
+    references: [],
     resources: [],
     milestones: [],
     title: "SBC Enclosure System",
@@ -164,6 +194,12 @@ export const labProjects: LabProject[] = [
   },
   {
     lessonsLearned: [],
+    designDecisions: [],
+    tradeoffs: [],
+    knownLimitations: [],
+    futureImprovements: [],
+    downloads: [],
+    references: [],
     resources: [],
     milestones: [],
     title: "CoreXY Conversion Framework",
@@ -212,6 +248,12 @@ export const labProjects: LabProject[] = [
   },
   {
     lessonsLearned: [],
+    designDecisions: [],
+    tradeoffs: [],
+    knownLimitations: [],
+    futureImprovements: [],
+    downloads: [],
+    references: [],
     resources: [],
     milestones: [],
     title: "Recon Dev CRM",
@@ -253,6 +295,12 @@ export const labProjects: LabProject[] = [
   },
   {
     lessonsLearned: [],
+    designDecisions: [],
+    tradeoffs: [],
+    knownLimitations: [],
+    futureImprovements: [],
+    downloads: [],
+    references: [],
     resources: [],
     milestones: [],
     title: "PERRLA Reference Extractor",
@@ -294,6 +342,12 @@ export const labProjects: LabProject[] = [
   },
   {
     lessonsLearned: [],
+    designDecisions: [],
+    tradeoffs: [],
+    knownLimitations: [],
+    futureImprovements: [],
+    downloads: [],
+    references: [],
     resources: [],
     milestones: [],
     title: "Food Service Platform",

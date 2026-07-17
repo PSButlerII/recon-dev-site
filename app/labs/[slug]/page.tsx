@@ -16,6 +16,12 @@ import { LabLessons } from "@/components/labs/LabLessons";
 import { LabMilestones } from "@/components/labs/LabMilestones";
 import { LabResources } from "@/components/labs/LabResources";
 import { LabEngineeringLifecycle } from "@/components/labs/LabEngineeringLifecycle";
+import { LabDesignDecisions } from "@/components/labs/LabDesignDecisions";
+import { LabDownloads } from "@/components/labs/LabDownloads";
+import { LabFutureImprovements } from "@/components/labs/LabFutureImprovements";
+import { LabKnownLimitations } from "@/components/labs/LabKnownLimitations";
+import { LabReferences } from "@/components/labs/LabReferences";
+import { LabTradeoffs } from "@/components/labs/LabTradeoffs";
 import Link from "next/link";
 
 type LabsDetailPageProps = {
@@ -139,18 +145,16 @@ export default async function LabsDetailPage({ params }: LabsDetailPageProps) {
           <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
             <div className="space-y-8 leading-8 text-slate-600">
               <section>
-                <LabEngineeringLifecycle
-                  lifecycle={project.engineeringLifecycle}
-                />
-              </section>
-
-              <section>
                 <h2 className="text-2xl font-bold tracking-tight text-slate-950">
                   Overview
                 </h2>
 
                 <p className="mt-4">{project.overview}</p>
               </section>
+
+              <LabEngineeringLifecycle
+                lifecycle={project.engineeringLifecycle}
+              />
 
               <section>
                 <h2 className="text-2xl font-bold tracking-tight text-slate-950">
@@ -168,13 +172,24 @@ export default async function LabsDetailPage({ params }: LabsDetailPageProps) {
                 <p className="mt-4">{project.currentFocus}</p>
               </section>
 
+              <LabDesignDecisions decisions={project.designDecisions} />
+              <LabTradeoffs tradeoffs={project.tradeoffs} />
+              <LabKnownLimitations
+                limitations={project.knownLimitations}
+              />
+              <LabDevelopmentLog entries={project.developmentLog} />
+              <LabLessons lessons={project.lessonsLearned} />
+              <LabDownloads downloads={project.downloads} />
+              <LabReferences references={project.references} />
+              <LabResources resources={project.resources} />
+              <LabFutureImprovements
+                improvements={project.futureImprovements}
+              />
+
               <section>
                 <h2 className="text-2xl font-bold tracking-tight text-slate-950">
                   Future Direction
                 </h2>
-                <LabDevelopmentLog entries={project.developmentLog} />
-                <LabLessons lessons={project.lessonsLearned} />
-                <LabResources resources={project.resources} />
                 <p className="mt-4">{project.futureDirection}</p>
               </section>
             </div>
