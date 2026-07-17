@@ -84,16 +84,85 @@ export type LabDevelopmentLogEntry = {
 
 export const labProjects: LabProject[] = [
   {
-    lessonsLearned: [],
-    designDecisions: [],
-    tradeoffs: [],
+    lessonsLearned: [
+      "State-change-only serial reporting can make monitoring appear unresponsive; periodic heartbeat or status reporting provides a clearer indication that the monitor is operating.",
+      "MMU lane selection and spool availability represent different states and should not share one indicator meaning.",
+      "Cutter workflows must match the physical cutter architecture rather than assume a toolhead-actuated lever.",
+      "Large retract values can introduce filament-handling problems even when intended to reduce oozing.",
+      "Active-lane configuration is necessary to avoid empty-spool alerts for lanes that are not participating in a print.",
+      "Hardware replacement should not be assumed to resolve an electrical issue until voltage behavior is tested under load.",
+    ],
+    designDecisions: [
+      {
+        title: "Separate lane and spool indication",
+        decision:
+          "Use the EBB42-side LEDs to identify the selected MMU lane and a separate indicator system for spool availability. These are different states: one identifies the feed path, while the other reports whether usable filament remains.",
+      },
+      {
+        title: "Use a servo for lane selection",
+        decision:
+          "Keep servo-based indexed lane selection for the current design so another stepper driver and home switch are not required. The selector uses calibrated positions at 18, 44, 65, 84, 109, 126, 147, and 170 degrees, with a 0.000500-second minimum pulse width, 0.002500-second maximum pulse width, and 180-degree maximum angle.",
+      },
+      {
+        title: "Actuate the cutter without toolhead positioning",
+        decision:
+          "Drive the filament cutter directly with a servo. Toolhead motion intended for a lever-style cutter is unnecessary for this mechanism and previously caused move-out-of-range errors.",
+      },
+      {
+        title: "Use cutting instead of traditional tip forming",
+        decision:
+          "Disable or bypass traditional tip forming because the current filament-change workflow uses a physical cutter and does not require the additional filament manipulation.",
+      },
+      {
+        title: "Retain a short pre-cut retraction",
+        decision:
+          "Use approximately 5 mm as the starting pre-cut retraction to help reduce nozzle ooze. The earlier 30 mm movement was considered excessive for this workflow.",
+      },
+      {
+        title: "Configure spool monitoring by active lane",
+        decision:
+          "Allow the external spool monitor to track only lanes marked active through configuration. Not every physical spool position participates in every print, so inactive lanes should not generate alerts.",
+      },
+    ],
+    tradeoffs: [
+      {
+        choice: "Servo selector versus stepper selector",
+        reason:
+          "A servo works with the available control hardware and avoids an additional driver and homing mechanism, but it depends on physically calibrated angles and provides no independent homing confirmation. A homed stepper could provide more deterministic indexing at the cost of more hardware and control complexity.",
+      },
+      {
+        choice: "UART versus HTTP/Wi-Fi monitoring",
+        reason:
+          "UART keeps communication local and simple, but requires reliable host-side serial parsing and status reporting. HTTP/Wi-Fi creates a clearer API boundary and supports dynamic configuration, while adding networking and MicroPython service complexity.",
+      },
+      {
+        choice: "Pico-class boards versus Raspberry Pi Zero 2 WH",
+        reason:
+          "Pico and Pico W boards provide low-power embedded control and direct hardware interaction. The Zero 2 WH provides a Linux environment for Flask and systemd integration, richer logging, and easier host-side development.",
+      },
+      {
+        choice: "Combined versus separate indicators",
+        reason:
+          "A combined lane-selection and spool-availability indicator would reduce hardware, but its meaning would be ambiguous. Separate indicators make the selected lane and available filament state distinct.",
+      },
+    ],
     knownLimitations: [
-      "The repository does not document a finalized Klipper integration or Pico communication approach.",
-      "Sensor feedback behavior remains under exploration, with no validation results recorded in the repository.",
+      "Servo positions require physical calibration and can vary with linkage geometry.",
+      "The servo selector has no independent homing confirmation.",
+      "The spool monitor and MMU control system remain separate subsystems.",
+      "The Wi-Fi Microdot implementation is not yet the primary completed implementation.",
+      "Long-duration and multi-printer validation has not been completed.",
+      "Cutter, load, unload, and filament-change behavior require continued real-print testing.",
+      "Public downloads and sanitized configuration packages have not been prepared.",
     ],
     futureImprovements: [
-      "Expand support to additional filament types.",
-      "Improve the monitoring and control interface.",
+      "Complete and validate the Pico W or Pico 2 W Microdot API implementation.",
+      "Consolidate sanitized configuration and setup documentation.",
+      "Improve synchronization between MMU lane state and external spool monitoring.",
+      "Add more reliable notification and print-pause behavior.",
+      "Perform longer real-print validation.",
+      "Explore a stepper-based selector only if the required driver and homing hardware provide a meaningful reliability improvement.",
+      "Create a public architecture diagram showing MMU control, cutter control, Klipper, and spool-monitor communication.",
     ],
     downloads: [],
     references: [],
@@ -103,11 +172,11 @@ export const labProjects: LabProject[] = [
     slug: "pico-mmu-filament-systems",
     status: "Active Development",
     overview:
-      "An active research and development effort covering a Raspberry Pi Pico-based multi-material unit and related filament systems, including spool monitoring, filament sensing, lane status, automation, and Klipper integration.",
+      "A four-lane LH Stinger Pico MMU and filament-handling system used with a Klipper-controlled Creality Ender 3 V3 SE. The MMU connects through a BTT EBB42 V1.2 toolhead board and combines lane selection, lane indication, a servo-driven filament cutter, a toolhead-path filament sensor, and external spool-availability monitoring.",
     currentFocus:
-      "Evaluating how the Pico MMU can integrate with Klipper and how sensor feedback can represent filament and lane state. The repository does not yet document a finalized communication or hardware-control approach.",
+      "The current spool-monitoring implementation uses a Raspberry Pi Zero 2 WH with GPIO sensors, LED indicators, a Flask API, timestamped JSONL logs with size-based rotation, and Klipper macros for state queries and active-lane updates. Current work also covers real-print testing of cutter and filament-change behavior and a separate Pico W or Pico 2 W API implementation using MicroPython and Microdot.",
     futureDirection:
-      "Continue defining the Klipper integration and sensor feedback approach, then expand filament support and improve the monitoring and control interface.",
+      "Develop the Wi-Fi API approach beyond the earlier UART prototypes, improve coordination between MMU lane state and spool availability, strengthen notification and pause behavior, and prepare sanitized public setup documentation after further validation.",
     category: "3D Printing / Klipper",
     started: "2025-04",
     lastUpdated: "2026-07",
