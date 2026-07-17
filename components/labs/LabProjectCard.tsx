@@ -25,13 +25,6 @@ export function LabProjectCard({ project }: LabProjectCardProps) {
 
       <div className="mt-6">
         <LabMaturityBar lifecycle={project.engineeringLifecycle} />
-
-        <div className="h-2 rounded-full bg-slate-100">
-          <div
-            className="h-2 rounded-full bg-slate-950"
-            style={{ width: `${project.engineeringLifecycle}%` }}
-          />
-        </div>
       </div>
 
       <dl className="mt-6 grid grid-cols-2 gap-4 text-sm">

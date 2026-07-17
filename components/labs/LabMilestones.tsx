@@ -5,17 +5,14 @@ type LabMilestonesProps = {
   className?: string;
 };
 
-const fallbackMilestones: LabMilestone[] = [
-  { id: "research", title: "Research Complete", completed: true },
-  { id: "requirements", title: "Requirements Defined", completed: true },
-  { id: "prototype", title: "Prototype Working", completed: true },
-  { id: "testing", title: "Testing", completed: false },
-  { id: "documentation", title: "Documentation", completed: false },
-  { id: "release", title: "Production Release", completed: false },
-];
-
 export function LabMilestones({ milestones, className }: LabMilestonesProps) {
-  const visibleMilestones = milestones.length > 0 ? milestones : fallbackMilestones;
+  if (milestones.length === 0) {
+    return (
+      <p className={["text-sm text-slate-500", className].filter(Boolean).join(" ")}>
+        No milestones have been documented yet.
+      </p>
+    );
+  }
 
   return (
     <div
@@ -26,7 +23,7 @@ export function LabMilestones({ milestones, className }: LabMilestonesProps) {
         .filter(Boolean)
         .join(" ")}
     >
-      {visibleMilestones.map((milestone, index) => (
+      {milestones.map((milestone, index) => (
         <span
           key={milestone.id ?? `${milestone.title}-${index}`}
           className="inline-flex items-center gap-1.5"

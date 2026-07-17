@@ -15,6 +15,7 @@ import { LabDevelopmentLog } from "@/components/labs/LabDevelopmentLog";
 import { LabLessons } from "@/components/labs/LabLessons";
 import { LabMilestones } from "@/components/labs/LabMilestones";
 import { LabResources } from "@/components/labs/LabResources";
+import { LabEngineeringLifecycle } from "@/components/labs/LabEngineeringLifecycle";
 import Link from "next/link";
 
 type LabsDetailPageProps = {
@@ -105,17 +106,7 @@ export default async function LabsDetailPage({ params }: LabsDetailPageProps) {
                   Maturity
                 </dt>
                 <dd className="mt-2">
-                  <div className="mb-2 flex items-center justify-between text-xs font-semibold text-slate-500">
-                    <span>Progress</span>
-                    <LabMaturityBar lifecycle={project.engineeringLifecycle} />
-                  </div>
-
-                  <div className="h-2 rounded-full bg-slate-100">
-                    <div
-                      className="h-2 rounded-full bg-slate-950"
-                      style={{ width: `${project.engineeringLifecycle}%` }}
-                    />
-                  </div>
+                  <LabMaturityBar lifecycle={project.engineeringLifecycle} />
                 </dd>
               </div>
 
@@ -147,6 +138,12 @@ export default async function LabsDetailPage({ params }: LabsDetailPageProps) {
 
           <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
             <div className="space-y-8 leading-8 text-slate-600">
+              <section>
+                <LabEngineeringLifecycle
+                  lifecycle={project.engineeringLifecycle}
+                />
+              </section>
+
               <section>
                 <h2 className="text-2xl font-bold tracking-tight text-slate-950">
                   Overview

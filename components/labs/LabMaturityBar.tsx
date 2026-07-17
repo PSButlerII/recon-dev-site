@@ -17,7 +17,14 @@ export function LabMaturityBar({ lifecycle }: LabMaturityBarProps) {
         <span>{maturity}%</span>
       </div>
 
-      <div className="h-2 rounded-full bg-slate-100">
+      <div
+        className="h-2 overflow-hidden rounded-full bg-slate-100"
+        role="progressbar"
+        aria-label="Engineering lifecycle completion"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={maturity}
+      >
         <div
           className="h-2 rounded-full bg-slate-950"
           style={{ width: `${maturity}%` }}
