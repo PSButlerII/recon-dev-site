@@ -71,7 +71,9 @@ export function SiteHeader() {
 
         <button
           type="button"
-          aria-label="Toggle menu"
+          aria-label={mobileOpen ? "Close main menu" : "Open main menu"}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-navigation"
           className="rounded-xl border border-slate-200 p-2 md:hidden"
           onClick={() => setMobileOpen((value) => !value)}
         >
@@ -80,7 +82,11 @@ export function SiteHeader() {
       </Container>
 
       {mobileOpen ? (
-       <div className="flex flex-col gap-4">
+       <nav
+          id="mobile-navigation"
+          aria-label="Mobile navigation"
+          className="flex flex-col gap-4"
+        >
           {siteConfig.nav.map((item) => (
             <NavLink
               key={item.href}
@@ -90,7 +96,7 @@ export function SiteHeader() {
               {item.label}
             </NavLink>
           ))}
-        </div>
+        </nav>
       ) : null}
     </header>
   );

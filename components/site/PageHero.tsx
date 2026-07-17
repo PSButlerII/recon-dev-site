@@ -15,7 +15,7 @@ export function PageHero({ eyebrow, title, children }: PageHeroProps) {
       </div>
 
       <div className="relative">
-        <SectionHeading eyebrow={eyebrow} title={title}>
+        <SectionHeading eyebrow={eyebrow} title={title} headingLevel={1}>
           {children}
         </SectionHeading>
       </div>
