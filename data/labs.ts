@@ -393,82 +393,91 @@ export const labProjects: LabProject[] = [
   },
   {
     lessonsLearned: [
-      "Keeping email delivery and CRM synchronization separate allows website intake to continue when the CRM connection is not configured or a sync attempt fails.",
-      "A stable inquiry identifier needs to cross the integration boundary so the receiving system can reject duplicate submissions.",
-      "Server-to-server integration keeps CRM credentials and signing material out of browser code.",
-      "Signed, timestamped requests provide the receiver with verification inputs, but replay and duplicate protection still need to be enforced by the receiving endpoint.",
-      "Separating lifecycle entities preserves the distinction between an initial request, active project work, and financial records.",
-      "Automatically generated activity history improves traceability without depending on users to restate each lifecycle change in a note.",
+      "Database uniqueness and transaction boundaries are necessary for repeat-safe conversions; interface controls alone do not prevent duplicate records under retries or concurrent requests.",
+      "Separating intake, service requests, projects, quotes, and invoices makes lifecycle state explicit and allows each transition to be validated independently.",
+      "Moving persistence and conversion logic behind server APIs keeps database access out of client components and gives business operations a consistent enforcement point.",
+      "Automatically created activity records improve traceability for selected transitions, but they do not yet constitute a complete immutable audit system.",
+      "Incremental persistence migrations preserve working workflows, but intermediate documentation and temporary data sources must be retired or clearly marked as the system evolves.",
+      "A signed server-to-server intake contract protects integration secrets from browser code, while duplicate and replay controls still need enforcement at the receiving API boundary.",
     ],
     designDecisions: [
       {
-        title: "Separate business entities by lifecycle stage",
+        title: "Model lifecycle stages as separate records",
         decision:
-          "Represent Clients, Service Requests, Projects, Quotes, and Invoices as separate entities because each describes a different stage of the client lifecycle. Activities and Notes provide supporting history rather than expanding one customer record indefinitely.",
+          "Represent intake submissions, service requests, clients, projects, quotes, invoices, tasks, notes, files, activity, and settings as distinct persisted entities. This keeps the responsibilities and status of each business stage explicit.",
       },
       {
-        title: "Replace temporary client state with persistence",
+        title: "Persist business records in PostgreSQL",
         decision:
-          "Move business records out of client-side temporary state so they survive reloads and can support future multi-user access.",
+          "Use Prisma-backed PostgreSQL storage as the system of record instead of relying on temporary browser state. Client-side context hydrates the workspace through protected JSON APIs.",
       },
       {
-        title: "Centralize business operations in API routes",
+        title: "Keep database operations behind route handlers",
         decision:
-          "Keep the UI focused on interaction and place persistence and business rules behind explicit API operations.",
+          "Place authentication, validation, persistence, and conversion operations in Next.js route handlers so client components do not access the database or server secrets directly.",
       },
       {
-        title: "Make entity conversions atomic and idempotent",
+        title: "Enforce repeat-safe lifecycle conversions",
         decision:
-          "Treat conversions between requests, projects, quotes, and related records as single repeat-safe operations so repeated actions cannot create duplicate business records.",
+          "Use unique database links and duplicate-aware operations for intake-to-request, request-to-project, and quote-to-invoice transitions. The request-to-project path also groups project creation, request status, and activity creation in one transaction.",
       },
       {
-        title: "Generate activity history automatically",
+        title: "Protect the workspace with owner sessions",
         decision:
-          "Create activity records for important lifecycle changes so the system maintains traceability without requiring a separate manual note for every transition.",
+          "Use server-verified owner credentials and a signed, expiring HTTP-only cookie for the current single-owner workspace. Multi-user identity and role models are not part of the implemented system.",
       },
       {
-        title: "Accept website inquiries through a server boundary",
+        title: "Treat website intake as an integration boundary",
         decision:
-          "Use the public website as a future intake source through a server-to-server request. The existing website adapter sends a typed inquiry payload with bearer authorization, a timestamp, and an HMAC signature when integration is configured.",
+          "Accept external website inquiries through a dedicated server-to-server endpoint that requires bearer authorization, a timestamped HMAC signature, payload validation, and a stable inquiry identifier. This bridge feeds the CRM intake subsystem; it is not the CRM application itself.",
       },
     ],
     tradeoffs: [
       {
-        choice: "Internal workflow optimization versus public SaaS product",
+        choice: "Single Next.js application versus separate services",
         reason:
-          "Focusing on Recon Dev's operating workflow keeps the model and interface specific to actual internal needs, but does not prioritize the tenant isolation, broad configurability, or onboarding required by a generic CRM product.",
+          "Keeping the UI, internal APIs, authentication, and persistence adapter in one application simplifies deployment and allows direct transaction handling, but couples the workspace and API contracts within one codebase.",
       },
       {
-        choice: "Practical simplicity versus enterprise feature depth",
+        choice: "Single-owner authentication versus named users",
         reason:
-          "A smaller set of explicit workflows is easier to maintain and use, while leaving advanced enterprise features outside the current scope.",
+          "A shared owner credential and stateless signed session match the current internal audience and avoid user/session tables, but provide no roles, per-user revocation, or actor-specific audit attribution.",
       },
       {
         choice: "Incremental persistence migration versus complete rewrite",
         reason:
-          "Incremental migration allows existing workflows to remain available while records move to durable storage, but temporarily requires coordination between migrated and remaining temporary state.",
+          "Entity-by-entity migrations preserve working features and produce an auditable schema history, but leave legacy mock data and historical documentation that can become inconsistent with current behavior.",
       },
       {
-        choice: "Strong typing and explicit APIs versus rapid feature additions",
+        choice: "Global client context versus page-specific loading",
         reason:
-          "Typed entities and explicit operations make lifecycle boundaries and integration contracts clearer, at the cost of more design work before adding new behavior.",
+          "Loading the CRM collections into one shared context gives pages a consistent data surface, but every authenticated page fetches all resources and shares a coarse loading and error state.",
+      },
+      {
+        choice: "Local file storage versus shared durable storage",
+        reason:
+          "Writing authenticated uploads to the application server is straightforward for a single durable host, but it does not provide atomic file-and-metadata writes or support ephemeral and multi-instance deployments without shared storage.",
       },
     ],
     knownLimitations: [
-      "The website-to-CRM sync remains disabled unless all required server-side integration settings are configured.",
-      "The receiving CRM endpoint is outside this repository, so its persistence, payload validation, replay protection, duplicate-inquiry enforcement, and rate limiting cannot be verified here.",
-      "The website adapter logs failed CRM responses but does not provide a retry queue for unsuccessful synchronization.",
-      "The CRM application, persistence schema, entity relationships, authentication, and permissions are not present in this repository and cannot be verified from this codebase.",
-      "Customer portal functionality remains future work.",
+      "The repository has no automated test suite or test script for authentication, persistence, billing, or conversion workflows.",
+      "Most cross-entity links are nullable string identifiers without database foreign keys, and copied display names can become stale.",
+      "Runtime validation is inconsistent across protected APIs; the public intake boundary has stronger schema and payload-size validation than many internal routes.",
+      "Authentication supports one owner credential and does not include login throttling, named users, roles, permissions, or per-user session revocation.",
+      "Uploaded files use local server storage, are not content-allowlisted or malware-scanned, and require durable shared storage for multi-instance operation.",
+      "The global client context fetches all CRM resources for every authenticated page and does not expose resource-specific failure states.",
+      "Production readiness is not demonstrated by automated tests, continuous integration, observability, health checks, restore exercises, or rollback automation.",
     ],
     futureImprovements: [
-      "Complete the migration from temporary client state to durable persistence.",
-      "Move remaining business operations behind explicit API routes.",
-      "Implement atomic, idempotent conversions between lifecycle entities.",
-      "Generate activity records automatically for important state changes and conversions.",
-      "Connect website intake to a receiving endpoint that enforces signature validation, timestamp and replay checks, payload limits, duplicate inquiry identifiers, logging, and rate limiting.",
-      "Add customer portal functionality after the internal entity and permission model is established.",
-      "Add reporting and analytics after the underlying records and relationships are persistent.",
+      "Add integration tests for authentication, unauthorized API access, public intake validation, and concurrent lifecycle conversions, then make tests part of continuous integration.",
+      "Adopt shared runtime schemas and consistent error mapping for internal create and update routes.",
+      "Apply the transactional, duplicate-aware conversion pattern consistently to intake-to-request and quote-to-invoice workflows.",
+      "Define relationship ownership and add database foreign keys incrementally where orphaned records are not intentional.",
+      "Move billing amounts to fixed-precision storage before invoices become an authoritative financial record.",
+      "Introduce durable shared file storage, cleanup behavior, retention rules, and file-content controls.",
+      "Split workspace data loading by page or domain and provide clear partial-failure states.",
+      "Add login throttling, structured operational logging, health checks, and documented recovery procedures.",
+      "Retain the signed website intake bridge and validate the end-to-end integration without exposing credentials or personal inquiry data.",
     ],
     downloads: [],
     references: [],
@@ -476,11 +485,11 @@ export const labProjects: LabProject[] = [
     milestones: [],
     title: "Recon Dev CRM",
     overview:
-      "An internal business-management platform for Recon Dev that separates Clients, Service Requests, Projects, Quotes, Invoices, Activities, and Notes across the client lifecycle. It is intended to reduce duplicate administrative work, preserve operational history, accept website inquiries, and support future customer access without becoming a generic CRM product.",
+      "Recon Dev CRM is a single-owner internal business-operations application for managing intake submissions, service requests, clients, projects, tasks, notes, files, quotes, invoices, settings, and activity. The Next.js workspace uses protected server APIs and Prisma-backed PostgreSQL persistence to carry work from inquiry through delivery and billing. A signed website contact-intake bridge is one input to this system, not the system itself.",
     currentFocus:
-      "Current architecture work is replacing temporary client-side state with durable persistence, keeping business operations behind explicit APIs, defining repeat-safe conversions between entities, and generating activity history for significant lifecycle changes.",
+      "Current engineering work is centered on making persisted workflows consistent: standardizing runtime validation, completing transactional and idempotent conversion paths, strengthening relational integrity, and establishing automated coverage for authentication, intake, billing, and project conversion behavior.",
     futureDirection:
-      "Complete the persistence and entity-operation foundation, connect the existing signed website-intake adapter to the receiving CRM endpoint, then add reporting and a customer portal on top of authenticated, permission-aware workflows.",
+      "The next direction is operational hardening rather than feature expansion: improve test and deployment controls, adopt durable shared file storage, refine page-level data loading, and validate the website-to-CRM intake path end to end. Named users or broader integrations should be considered only if a confirmed operating need extends beyond the current single-owner model.",
     slug: "recon-dev-crm",
     status: "Internal Tool",
     category: "Business Systems",
@@ -489,29 +498,32 @@ export const labProjects: LabProject[] = [
     openSource: false,
     clientFacing: false,
     summary:
-      "A custom business management system for clients, service requests, projects, invoices, quotes, and future website intake integration.",
-    tags: ["Next.js", "CRM", "Internal Systems", "Automation"],
+      "A PostgreSQL-backed internal CRM for intake, client work, project delivery, billing records, files, and operational history.",
+    tags: ["Next.js", "PostgreSQL", "Prisma", "CRM", "Internal Systems"],
     developmentLog: [
       {
-        date: "2026-07-05",
+        date: "2026-07-06",
         type: "Build",
-        title: "Website CRM request contract tightened",
+        phase: "prototype",
+        title: "Intake workflow visibility improved",
         summary:
-          "Updated the website adapter to require its signing configuration, use a Unix timestamp in the signature contract, and retain response details for failed server-side sync diagnostics.",
+          "Polished the website-submission intake workflow and added the count of new intake records to the authenticated workspace navigation.",
       },
       {
-        date: "2026-05-19",
-        type: "Documentation",
-        title: "Signed intake transport documented",
+        date: "2026-07-01",
+        type: "Build",
+        phase: "prototype",
+        title: "Protected public intake and file persistence added",
         summary:
-          "Added HMAC signing and timestamp headers to the website-side CRM request and documented receiver requirements for HTTPS, validation, replay protection, duplicate inquiry identifiers, payload limits, logging, and rate limiting.",
+          "Added the authenticated server-to-server intake endpoint, synchronized accepted website inquiries into CRM intake, introduced local file uploads, and documented owner authentication and production deployment requirements.",
       },
       {
-        date: "2026-05-17",
+        date: "2026-06-30",
         type: "Build",
-        title: "Structured website inquiry adapter introduced",
+        phase: "prototype",
+        title: "Core persistence conversions strengthened",
         summary:
-          "Added a typed ContactInquiry payload, generated inquiry identifiers, CRM payload mapping, and an optional server-to-server synchronization step after email delivery.",
+          "Moved client workflows onto PostgreSQL-backed APIs and added a transactional, idempotent service-request-to-project conversion guarded by a unique project link.",
       },
     ],
     engineeringLifecycle: {
